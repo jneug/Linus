@@ -13,6 +13,12 @@ if ( ! defined( 'MEDIAWIKI' ) ) {
 
 class LinusHooks {
 
+	static function styleEditButtons( &$editpage, &$buttons, &$tabindex ) {
+		$buttons['save'] = substr($buttons['save'],0,-1).' class="btn btn-success">';
+		$buttons['preview'] = substr($buttons['preview'],0,-1).' class="btn btn-primary">';
+		$buttons['diff'] = substr($buttons['diff'],0,-1).' class="btn btn-primary">';
+	}
+
 	static function NavSetup( Parser $parser ) {
 		$parser->setHook( 'nav', 'LinusHooks::buildNavigation' );
 		return true;

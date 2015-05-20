@@ -90,3 +90,5 @@ $wgLinusHideActionsForAnon = true;
 $wgLinusTitlebarPage = 'MediaWiki:Linus/Titlebar';
 $wgLinusFooterPage = 'MediaWiki:Linus/Footer';
 $wgLinusCopyrightPage = 'MediaWiki:Linus/Copyright';
+
+$wgLinusHideHeader = array('Mainpage','Hauptseite');
