@@ -1,13 +1,22 @@
+
 body.fixed-navbar {
 	padding-top: 70px;
 }
-
 body.fixed-navbar .postedit-container {
 	top: 55px;
 }
-
 .postedit {
 
+}
+.redirectMsg p {
+    height: auto;
+}
+.pagesubtitle {
+    font-size: 1.2em;
+    margin-bottom: auto;
+}
+textarea {
+    width: 100%;
 }
 
 
