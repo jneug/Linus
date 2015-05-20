@@ -30,6 +30,7 @@ $wgAutoloadClasses['LinusHooks'] = __DIR__ . '/LinusHooks.php';
 $wgMessagesDirs['Linus'] = __DIR__ . '/i18n';
 
 $wgHooks['ParserFirstCallInit'][] = 'LinusHooks::NavSetup';
+$wgHooks['ParserFirstCallInit'][] = 'LinusHooks::ButtonsSetup';
 
 // Setup resource modules
 // To use Bootswatch, $wgLinusBwTheme has to be set before requireing Linus.php
