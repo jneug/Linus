@@ -57,7 +57,11 @@ class LinusParser {
         } else if( empty($navItem['href']) ) {
           $output .= '<button class="'.$btnClasses.($level==0?' disabled':' dropdown-header').'">'.LinusParser::getIcon($navItem['icon']).$navItem['text'].'</button>';
         } else {
-          $output .= '<a href="'.$navItem['href'].'" class="'.$btnClasses.'">'.LinusParser::getIcon($navItem['icon']).$navItem['text'].'</a>';
+	      	$attributes = array('href="'.$navItem['href'].'"', 'class="'.$btnClasses.'"');
+	      	if( isset($navItem['rel']) )
+				$attributes[] = 'rel="'.$navItem['rel'].'"';
+
+        	$output .= '<a '.implode(' ',$attributes).'>'.LinusParser::getIcon($navItem['icon']).$navItem['text'].'</a>';
         }
       }
     } // end foreach
@@ -84,64 +88,16 @@ class LinusParser {
         } else if( empty($navItem['href']) ) {
           $output .= '<li class="'.($level==0?'navbar-text':'dropdown-header').'">'.LinusParser::getIcon($navItem['icon']).$navItem['text'].'</li>';
         } else {
-          $output .= '<li><a href="'.$navItem['href'].'">'.LinusParser::getIcon($navItem['icon']).$navItem['text'].'</a></li>';
+	      	$attributes = array('href="'.$navItem['href'].'"');
+	      	if( isset($navItem['rel']) )
+				$attributes[] = 'rel="'.$navItem['rel'].'"';
+
+			$output .= '<li><a '.implode(' ',$attributes).'>'.LinusParser::getIcon($navItem['icon']).$navItem['text'].'</a></li>';
         }
       }
     } // end foreach
     return $output;
   }
-
-  /**
-  * Render one or more navigations elements by name, automatically reveresed
-  * when UI is in RTL mode
-  */
-  static private function _nav( $nav ) {
-    $output = '';
-    foreach ( $nav as $topItem ) {
-      // check mandatory properties
-      if( !isset($topItem['title']) && !isset($topItem['link']) ) continue;
-      $title = isset($topItem['title']) ? $topItem['title'] : $topItem['link'];
-      $pageTitle = Title::newFromText( $title );
-
-      $icon = LinusParser::_buildIcon($topItem);
-
-      if ( array_key_exists('sublinks', $topItem) ) {
-        $output .= '<li class="dropdown">';
-        $output .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $icon . $title . ' <b class="caret"></b></a>';
-        $output .= '<ul class="dropdown-menu">';
-
-        foreach ( $topItem['sublinks'] as $subLink ) {
-          $subtitle = isset($subLink['title']) ? $subLink['title'] : $subLink['link'];
-          $subicon = LinusParser::_buildIcon($subLink);
-
-          $subLink['attributes'] = isset($subLink['attributes']) ? $subLink['attributes'] : '';
-          $subLink['class'] = isset($subLink['class']) ? $subLink['class'] : '';
-
-          if ( '----' == $subLink ) {
-            $output .= "<li class='divider'></li>\n";
-          } elseif ( isset($subLink['textonly']) && $subLink['textonly'] ) {
-            $output .= "<li class=\"dropdown-header\">" . $subicon . "{$subtitle}</li>\n";
-          } else {
-            if( isset($subLink['local']) && $subLink['local'] && $subpageTitle = Title::newFromText($subtitle) ) {
-              $href = $subpageTitle->getLocalURL();
-            } else {
-              $href = isset($subLink['link']) ? $subLink['link'] : '';
-            } //end else
-
-            $slug = strtolower( str_replace(' ', '-', preg_replace( '/[^a-zA-Z0-9 ]/', '', trim( strip_tags( $subtitle ) ) ) ) );
-            $output .= "<li {$subLink['attributes']}><a href='{$href}' class='{$subLink['class']} {$slug}'>" . $icon . "{$subtitle}</a>";
-          } //end else
-        }
-        $output .= '</ul>';
-        $output .= '</li>';
-      } else {
-        if( $pageTitle ) {
-          $output .= '<li' . (LinusParser::data['title'] == $title ? ' class="active"' : '') . '><a href="' . ( $topItem['external'] ? $link : $pageTitle->getLocalURL() ) . '">' . $icon . $title . '</a></li>';
-        }//end if
-      }//end else
-    }//end foreach
-    return $output;
-  }//end nav
 
   static public function getNavigationFromData( $name, $text, &$data ) {
     $navArray = array();
@@ -200,87 +156,7 @@ class LinusParser {
   static public function getNavigationFromPage($title) {
     $content = LinusParser::getPageContent($title, '', true);
     return LinusParser::getNavigationFromString($content);
-
-    // $nav = array();
-    // foreach(explode("\n", $content) as $line) {
-    //   if(trim($line) == '') continue;
-    //   if( preg_match('/^\*\*\s*----/', $line) ) {
-    //     $nav[count($nav)-1]['items'][] = array('divider' => true);
-    //     continue;
-    //   } //end if
-
-    //   $icon = '';
-    //   if(preg_match('/^(.*)\s*\(icon:(fa-.+)\)\s*$/', $line, $iconMatch)) {
-    //     $icon = $iconMatch[2];
-    //     $line = $iconMatch[1];
-    //   } else if(preg_match('/^(.*)\s*\(icon:(\S+)\)\s*$/', $line, $iconMatch)) {
-    //     $icon = $iconMatch[2];
-    //     $line = $iconMatch[1];
-    //   }
-
-    //   $sub = false;
-    //   $link = false;
-    //   $external = false;
-
-    //   if(preg_match('/^\*\s*([^\*]*)\[\[:?(.+)\]\]/', $line, $match)) {
-    //     $sub = false;
-    //     $link = true;
-    //   }elseif(preg_match('/^\*\s*([^\*\[]*)\[([^\[ ]+) (.+)\]/', $line, $match)) {
-    //     $sub = false;
-    //     $link = true;
-    //     $external = true;
-    //   }elseif(preg_match('/^\*\*\s*([^\*\[]*)\[([^\[ ]+) (.+)\]/', $line, $match)) {
-    //     $sub = true;
-    //     $link = true;
-    //     $external = true;
-    //   }elseif(preg_match('/\*\*\s*([^\*]*)\[\[:?(.+)\]\]/', $line, $match)) {
-    //     $sub = true;
-    //     $link = true;
-    //   }elseif(preg_match('/\*\*\s*([^\* ]*)(.+)/', $line, $match)) {
-    //     $sub = true;
-    //     $link = false;
-    //   }elseif(preg_match('/^\*\s*(.+)/', $line, $match)) {
-    //     $sub = false;
-    //     $link = false;
-    //   }
-
-    //   $match[1] = isset($match[1]) ? $match[1] : '';
-    //   $match[2] = isset($match[2]) ? $match[2] : '';
-    //   if( strpos( $match[2], '|' ) !== false ) {
-    //     $item = explode( '|', $match[2] );
-    //     $item = array(
-    //       'text' => $match[1] . $item[1],
-    //       'href' => $item[0],
-    //       'local' => true,
-    //     );
-    //   } else {
-    //     if( $external ) {
-    //       $item = $match[2];
-    //       $title = $match[1] . $match[3];
-    //     } else {
-    //       $item = $match[1] . $match[2];
-    //       $title = $item;
-    //     }//end else
-
-    //     if( $link ) {
-    //       $item = array('text'=> $title, 'href' => $item, 'local' => ! $external , 'external' => $external );
-    //     } else {
-    //       $item = array('text'=> $title, 'href' => $item, 'textonly' => true, 'external' => $external );
-    //     }//end else
-    //   }//end else
-
-    //   $item['icon'] = $icon;
-
-    //   if( $sub ) {
-    //     $nav[count($nav)-1]['items'][] = $item;
-    //   } else {
-    //     $nav[] = $item;
-    //   }//end else
-    // }
-
-    // return $nav;
-  } //end get_page_links
-
+  }
 
   static public function getNavigationFromString($content) {
 	$content = explode("\n", $content);
@@ -339,9 +215,10 @@ class LinusParser {
         $keyword = substr($href, 0, strpos($href, '?'));
         $query = substr($href, strpos($href, '?'));
       }
-      if( in_array($keyword, array('self')) ) {
+      if( in_array($keyword, array('self','mainpage')) ) {
         switch( $keyword ) {
           case 'self': global $wgTitle; $href = $wgTitle->getLocalURL(); break;
+          case 'mainpage': $href = Title::newMainPage()->getLocalURL(); break;
         }
         $href .= $query;
       }
