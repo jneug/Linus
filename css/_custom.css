@@ -1,0 +1,61 @@
+#wiki-outer-body {
+    background-color: #fff;
+    background-image: url(skins/bootstrap3-mediawiki/images/wiki-bg.jpg);
+    background-repeat: repeat-x;
+    background-position: center top;
+}
+
+footer, .footer {
+  color: #F5F5F5;
+}
+
+footer .panel, .footer .panel {
+  color: #333;
+}
+
+blockquote {
+  font-size: 110%;
+  /*font-style: italic;*/
+  font-family: Times New Roman;
+  line-height: 160%;
+}
+
+code {
+    padding: 2px 4px;
+    font-size: 80%;
+    color: #eee;
+    background-color: #222;
+    white-space: nowrap;
+    border-radius: 2px;
+}
+
+.table caption {
+  text-align: center;
+}
+
+.text-muted a {
+  color: #888;
+  font-weight: 600;
+}
+
+del {
+  background-color: #F3DEDE;
+  text-decoration: line-through;
+}
+
+/* Infoboxen */
+div.infobox {
+  margin: 0px 0px 10px 10px;
+}
+div.infobox table.table {
+  margin-bottom: 0px;
+  max-width: 360px;
+}
+
+/* Hint panels */
+div.panel.panel-hint .panel-body {
+  padding: 8px;
+}
+div.panel.panel-hint .panel-body img {
+  margin-right: 5px;
+}
