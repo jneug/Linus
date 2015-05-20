@@ -1,4 +1,6 @@
-# Bootstrap3-Mediawiki
+# Linus - A MediaWiki Skin
+
+**Note: This readme is not up-to-date. It will be updated as soon as the skin reaches a stable version.**
 
 This is a MediaWiki skin that uses [Bootstrap 3](http://www.getbootstrap.com) from Twitter. The skin is an adaption of the [Bootstrap Mediawiki](http://github.com/borkweb/bootstrap-mediawiki) skin by [Matthew Batchelder](http://borkweb.com).
 
