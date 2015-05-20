@@ -17,7 +17,7 @@ class LinusTemplate extends BaseTemplate {
 	 * Outputs the entire contents of the page
 	 */
 	public function execute() {
-    global $wgLinusUseSidebar, $wgLinusTOCInSidebar;
+    global $wgLinusUseSidebar, $wgLinusTOCInSidebar, $wgLinusHideHeader;
 
 		$this->html( 'headelement' );
     ?>
@@ -52,10 +52,13 @@ class LinusTemplate extends BaseTemplate {
   				<!-- /newtalk -->
   				<?php endif; ?>
 
-          <?php if ( !empty( $this->data['title'] ) ): ?>
+          <?php if ( !empty( $this->data['title'] ) && !in_array($this->data['title'],$wgLinusHideHeader) ): ?>
   				<div class="pagetitle page-header">
-  					<h1><?php $this->html( 'title' ) ?>
-             <?php if( $this->data['subtitle'] ): ?><small><?php $this->html('subtitle') ?></small><?php endif; ?></h1>
+  					<h1><?php $this->html( 'title' ) ?></h1>
+
+            <?php if( $this->data['subtitle'] ): ?>
+            <div class="pagesubtitle text-muted"><?php $this->html('subtitle') ?></div>
+            <?php endif; ?>
   				</div>
           <?php endif; ?>
 
