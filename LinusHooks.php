@@ -48,11 +48,11 @@ class LinusHooks {
 	}
 
 	static function buildButtons( $input, array $args, Parser $parser, PPFrame $frame ) {
-		$classes = '';
+		$classes = 'btn-group';
 		if( isset($args['class']) ) {
-			$classes .= $args['class'];
+			$classes .= ' '.$args['class'];
 		} else {
-			$classes .= 'btn-group';
+			$classes .= '';
 		}
 
 		$btnType = 'default';
