@@ -45,8 +45,8 @@ class LinusParser {
         $output .= '<button type="button"'.($level>0?' class="'.$btnClasses.'"':' class="'.$btnClasses.' dropdown-toggle" data-toggle="dropdown"').'>'
                       . LinusParser::getIcon($navItem['icon'])
                       . $navItem['text']
-                      . ($level>0?:' <span class="caret"></span>')
-                      .'</button>';
+                      . ' <span class="caret"></span>'
+                      . '</button>';
         $output .= '<ul class="dropdown-menu" role="menu">';
         $output .= LinusParser::nav($navItem['items'], $level+1);
         $output .= '</ul>';
@@ -72,11 +72,11 @@ class LinusParser {
     $output = '';
     foreach ( $nav as $navSlug => $navItem ) {
       if ( array_key_exists('items', $navItem) ) {
-        $output .= '<li class="dropdown'.($level==0?:'-submenu').'">';
-        $output .= '<a href="#"'.($level>0?:' class="dropdown-toggle" data-toggle="dropdown"').'>'
+        $output .= '<li class="dropdown'.($level==0?'':'-submenu').'">';
+        $output .= '<a href="#"'.($level>0?'':' class="dropdown-toggle" data-toggle="dropdown"').'>'
                       . LinusParser::getIcon($navItem['icon'])
                       . $navItem['text']
-                      . ($level>0?:' <span class="caret"></span>')
+                      . ' <span class="caret"></span>'
                       .'</a>';
         $output .= '<ul class="dropdown-menu">';
         $output .= LinusParser::nav($navItem['items'], $level+1);
