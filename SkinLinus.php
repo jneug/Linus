@@ -32,7 +32,7 @@ class SkinLinus extends SkinTemplate {
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->' );
 
-      $out->addModules( 'skins.linus.scripts' );
+      $out->addModuleScripts( 'skins.linus.scripts' );
   	}
 
   	/**
