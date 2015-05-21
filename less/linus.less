@@ -4,21 +4,19 @@
 
 // Set body padding for fixed navbar
 body.fixed-navbar {
-	// padding-top: 70px;
 	padding-top: @navbar-height * 1.4;
 }
 .postedit-container {
-	// z-index: 1050;
 	z-index: @zindex-modal;
 }
 body.fixed-navbar .postedit-container {
-	// top: 55px;
 	top: @navbar-height * 1.1;
 }
 .postedit {
 
 }
 
+/* Page footer */
 .footer {
     margin-top: @footer-margin-top;
     padding-bottom: @footer-padding-vertical / 2;
@@ -42,8 +40,8 @@ body.fixed-navbar .postedit-container {
 }
 .footer-inverse {
 	color: @footer-inverse-color;
-  background-color: @footer-inverse-bg;
-  border-color: @footer-inverse-border;
+	background-color: @footer-inverse-bg;
+	border-color: @footer-inverse-border;
 
 	a {
 		color: @footer-inverse-link-color;
@@ -79,7 +77,8 @@ blockquote {
 	}
 }
 
-// Need to overwrite colors in text states
+/* Contextual text colors */
+// Need to overwrite colors in text states for some reason
 .text-emphasis-variant-a(@color) {
   color: @color;
 	font-weight: @state-link-weight;
@@ -114,11 +113,32 @@ blockquote {
     font-size: 1.2em;
     margin-bottom: auto;
 }
-/* textarea, */
-#wpTextbox1 {
-    width: 100%;
+
+/* Headlines */
+.mw-headline {
+	// text-shadow: 1px 1px 0 rgb(255,255,255);
+}
+h2, h3, h4, h5, h6 {
+	.mw-editsection {
+		opacity: .6;
+	}
+	&:hover {
+		.mw-editsection {
+			opacity: .9;
+		}
+	}
+}
+#wiki-body h2 {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 0.5em;
 }
 
+/* Editform */
+#wpTextbox1 {
+	width: 100%;
+}
+
+/* Category links */
 .category-links {
 	clear: both;
 }
@@ -127,45 +147,14 @@ blockquote {
 	margin-top: 2em;
 	padding: 1em 0;
 }
-
 #catlinks #mw-normal-catlinks > a {
 
 }
-
 #catlinks li {
 	border-left: 1px solid;
 }
-
 #catlinks li:first-child {
 	border-left: none;
-}
-
-.mw-headline {
-	// text-shadow: 1px 1px 0 rgb(255,255,255);
-}
-
-
-h2 .mw-editsection,
-h3 .mw-editsection,
-h4 .mw-editsection,
-h5 .mw-editsection,
-h6 .mw-editsection {
-	opacity: .6;
-}
-
-h2:hover .mw-editsection,
-h3:hover .mw-editsection,
-h4:hover .mw-editsection,
-h5:hover .mw-editsection,
-h6:hover .mw-editsection {
-	opacity: .9;
-}
-
-/**
-	BS3 style Info-Box for MediaWiki
-*/
-.infobox {
-	float: right !important;
 }
 
 
@@ -225,4 +214,12 @@ h6:hover .mw-editsection {
 	    margin-left: -1px;
 		border-radius: @border-radius-base;
 	}
+}
+
+
+/**
+	BS3 style Info-Box for MediaWiki
+*/
+.infobox {
+	float: right !important;
 }
