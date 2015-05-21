@@ -48,7 +48,7 @@ class LinusParser {
                       . ($level>0?:' <span class="caret"></span>')
                       .'</button>';
         $output .= '<ul class="dropdown-menu" role="menu">';
-        $output .= LinusParser::nav($navItem['items'], $options, $level+1);
+        $output .= LinusParser::nav($navItem['items'], $level+1);
         $output .= '</ul>';
         $output .= '</div>';
       } else {
