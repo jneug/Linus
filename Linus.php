@@ -34,18 +34,10 @@ $wgHooks['ParserFirstCallInit'][] = 'LinusHooks::ButtonsSetup';
 $wgHooks['EditPageBeforeEditButtons'][] = 'LinusHooks::styleEditButtons';
 
 // Setup resource modules
-// To use Bootswatch, $wgLinusBwTheme has to be set before requireing Linus.php
-// TODO: Remove Bootswatch from bundel, include instrcutions in readme.md
-if( isset($wgLinusBootswatchTheme) ) {
-  $bsTheme = $wgLinusBootswatchTheme;
-} else {
-  $bsTheme = 'bootstrap';
-}
-
 // TODO: Use .less files here?
 $wgResourceModules['skins.linus.styles'] = array(
 	'styles' => array(
-	    'css/'.$bsTheme.'.min.css' => array( 'media' => 'all' ),
+	    'css/bootstrap.min.css'    => array( 'media' => 'all' ),
 	    'less/linus.less'          => array( 'media' => 'all' ),
 		'less/custom.less'         => array( 'media' => 'all' ),
 		'less/print.less'          => array( 'media' => 'print' ),
