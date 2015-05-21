@@ -35,17 +35,20 @@ $wgHooks['EditPageBeforeEditButtons'][] = 'LinusHooks::styleEditButtons';
 
 // Setup resource modules
 // To use Bootswatch, $wgLinusBwTheme has to be set before requireing Linus.php
+// TODO: Remove Bootswatch from bundel, include instrcutions in readme.md
 if( isset($wgLinusBootswatchTheme) ) {
   $bsTheme = $wgLinusBootswatchTheme;
 } else {
   $bsTheme = 'bootstrap';
 }
 
+// TODO: Use .less files here?
 $wgResourceModules['skins.linus.styles'] = array(
 	'styles' => array(
-    'css/'.$bsTheme.'.min.css' => array( 'media' => 'all' ),
-    'css/linus.css'            => array( 'media' => 'all' ),
-		'css/custom.css'           => array( 'media' => 'all' ),
+	    'css/'.$bsTheme.'.min.css' => array( 'media' => 'all' ),
+	    'less/linus.less'          => array( 'media' => 'all' ),
+		'less/custom.less'         => array( 'media' => 'all' ),
+		'less/print.less'          => array( 'media' => 'print' ),
 	),
 	'remoteSkinPath' => 'Linus',
 	'localBasePath' => __DIR__,
@@ -53,9 +56,9 @@ $wgResourceModules['skins.linus.styles'] = array(
 
 $wgResourceModules['skins.linus.scripts'] = array(
 	'scripts' => array(
-    'js/bootstrap.min.js',
-    'js/linus.js',
-    'js/custom.js',
+	    'js/bootstrap.min.js',
+	    'js/linus.js',
+	    'js/custom.js',
 	),
 	'remoteSkinPath' => 'Linus',
 	'localBasePath' => __DIR__,
@@ -78,15 +81,20 @@ $wgResourceModules['skins.linus.fontawesome'] = array(
 );
 
 
-$wgLinusUseSidebar = true;
-$wgLinusTOCInSidebar = false;
+$wgLinusUseSidebar = false;
+$wgLinusTOCInSidebar = true;
 $wgLinusNavbarInverted = false;
 $wgLinusNavbarFixed = true;
 $wgLinusUseFontAwesome = true;
-$wgLinusUseBootstrapTheme = false;
+$wgLinusUseBootstrapTheme = false; // TODO: Remove theme?
 $wgLinusShowFooterLinks = false;
 $wgLinusUseFooterIcons = true;
 $wgLinusHideActionsForAnon = true;
+$wgLinusEnableNavTag = true;
+$wgLinusEnableButtonsTag = true;
+
+// TODO: Add settings for footer/header/navbar/... classes
+// $wgLinusClassFooter = 'navbar navbar-inverse';
 
 $wgLinusTitlebarPage = 'MediaWiki:Linus/Titlebar';
 $wgLinusFooterPage = 'MediaWiki:Linus/Footer';

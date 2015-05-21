@@ -1,0 +1,222 @@
+
+@import "variables.less";
+@import "variables-linus.less";
+
+// Set body padding for fixed navbar
+body.fixed-navbar {
+	// padding-top: 70px;
+	padding-top: @navbar-height * 1.4;
+}
+.postedit-container {
+	// z-index: 1050;
+	z-index: @zindex-modal;
+}
+body.fixed-navbar .postedit-container {
+	// top: 55px;
+	top: @navbar-height * 1.1;
+}
+.postedit {
+
+}
+
+.footer {
+    margin-top: @footer-margin-top;
+    padding-bottom: @footer-padding-vertical / 2;
+    padding-top: @footer-padding-vertical;
+		padding-left: @footer-padding-horizontal;
+		padding-right: @footer-padding-horizontal;
+}
+.footer-default {
+	color: @footer-default-color;
+	background-color: @footer-default-bg;
+	border-color: @footer-default-border;
+
+	a {
+    color: @footer-default-link-color;
+
+    &:hover,
+    &:focus {
+      color: @footer-default-link-hover-color;
+    }
+  }
+}
+.footer-inverse {
+	color: @footer-inverse-color;
+  background-color: @footer-inverse-bg;
+  border-color: @footer-inverse-border;
+
+	a {
+		color: @footer-inverse-link-color;
+		font-weight: @state-link-weight;
+
+		&:hover,
+		&:focus {
+			color: @footer-inverse-link-hover-color;
+		}
+	}
+}
+
+// Copied from bootstrap 3.4 to ensure backwards compatiblity
+// (blockquote > small is deprecated)
+blockquote {
+	small {
+    display: block;
+    font-size: 80%; // back to default font-size
+    line-height: @line-height-base;
+    color: @blockquote-small-color;
+
+    &:before {
+      content: '\2014 \00A0'; // em dash, nbsp
+    }
+  }
+}
+.blockquote-reverse {
+	small {
+		&:before { content: ''; }
+		&:after {
+			content: '\00A0 \2014'; // nbsp, em dash
+		}
+	}
+}
+
+// Need to overwrite colors in text states
+.text-emphasis-variant-a(@color) {
+  color: @color;
+	font-weight: @state-link-weight;
+  a&:hover,
+  a&:focus {
+    color: darken(@color, 10%);
+  }
+}
+.text-muted a {
+	.text-emphasis-variant-a(@text-muted);
+}
+.text-primary a {
+	.text-emphasis-variant-a(@brand-primary);
+}
+.text-success a {
+	.text-emphasis-variant-a(@state-success-text);
+}
+.text-danger a {
+	.text-emphasis-variant-a(@state-danger-text);
+}
+.text-warning a {
+	.text-emphasis-variant-a(@state-warning-text);
+}
+.text-info a {
+	.text-emphasis-variant-a(@state-info-text);
+}
+
+.redirectMsg p {
+    height: auto;
+}
+.pagesubtitle {
+    font-size: 1.2em;
+    margin-bottom: auto;
+}
+/* textarea, */
+#wpTextbox1 {
+    width: 100%;
+}
+
+.category-links {
+	clear: both;
+}
+#catlinks {
+	border-top: 1px dotted;
+	margin-top: 2em;
+	padding: 1em 0;
+}
+
+#catlinks #mw-normal-catlinks > a {
+
+}
+
+#catlinks li {
+	border-left: 1px solid;
+}
+
+#catlinks li:first-child {
+	border-left: none;
+}
+
+.mw-headline {
+	// text-shadow: 1px 1px 0 rgb(255,255,255);
+}
+
+
+h2 .mw-editsection,
+h3 .mw-editsection,
+h4 .mw-editsection,
+h5 .mw-editsection,
+h6 .mw-editsection {
+	opacity: .6;
+}
+
+h2:hover .mw-editsection,
+h3:hover .mw-editsection,
+h4:hover .mw-editsection,
+h5:hover .mw-editsection,
+h6:hover .mw-editsection {
+	opacity: .9;
+}
+
+/**
+	BS3 style Info-Box for MediaWiki
+*/
+.infobox {
+	float: right !important;
+}
+
+
+/**
+    BS3 Multi level dropdown
+    http://bootsnipp.com/snippets/featured/multi-level-dropdown-menu-bs3
+*/
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}

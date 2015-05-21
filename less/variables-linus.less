@@ -1,0 +1,49 @@
+/*
+  Linus skin
+
+  Some varaibles for the general styling of the skin.
+  Included in linus.less after variables.less to use values from bootstrap.
+*/
+
+//== General
+//
+//##
+@state-link-weight: 500;
+
+//== Footer
+//
+//##
+
+// Basics of a navbar
+@footer-margin-top:                @line-height-computed;
+@footer-padding-horizontal:        floor((@grid-gutter-width / 2));
+@footer-padding-vertical:          2em;
+
+@footer-default-color:             @navbar-default-color;
+@footer-default-bg:                @navbar-default-bg;
+@footer-default-border:            @navbar-default-border;
+
+// Navbar links
+@footer-default-link-color:                darken(@footer-default-color, 15%);
+@footer-default-link-hover-color:          @navbar-default-link-hover-color;
+@footer-default-link-hover-bg:             @navbar-default-link-hover-bg;
+@footer-default-link-active-color:         @navbar-default-link-active-color;
+@footer-default-link-active-bg:            @navbar-default-link-active-bg;
+@footer-default-link-disabled-color:       @navbar-default-link-disabled-color;
+@footer-default-link-disabled-bg:          @navbar-default-link-disabled-bg;
+
+
+//=== Inverted navbar
+// Reset inverted navbar basics
+@footer-inverse-color:             @navbar-inverse-color;
+@footer-inverse-bg:                @navbar-inverse-bg;
+@footer-inverse-border:            @navbar-inverse-border;
+
+// Inverted navbar links
+@footer-inverse-link-color:                darken(@footer-inverse-color, 15%);
+@footer-inverse-link-hover-color:          @navbar-inverse-link-hover-color;
+@footer-inverse-link-hover-bg:             @navbar-inverse-link-hover-bg;
+@footer-inverse-link-active-color:         @navbar-inverse-link-active-color;
+@footer-inverse-link-active-bg:            @navbar-inverse-link-active-bg;
+@footer-inverse-link-disabled-color:       @navbar-inverse-link-disabled-color;
+@footer-inverse-link-disabled-bg:          @navbar-inverse-link-disabled-bg;

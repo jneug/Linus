@@ -202,13 +202,13 @@ class LinusTemplate extends BaseTemplate {
     global $wgLinusNavbarInverted, $wgLinusShowFooterLinks,
       $wgLinusUseFooterIcons, $wgLinusFooterPage, $wgLinusCopyrightPage;
 
-    $footerClasses = 'navbar-default';
+    $footerClasses = 'footer footer-default';
     if( $wgLinusNavbarInverted ) {
-      $footerClasses = 'navbar-inverse';
+      $footerClasses = 'footer footer-inverse';
     }
     ?>
     <footer class="<?php echo $footerClasses ?>">
-      <div class="container">
+      <div class="container-fluid">
         <?php echo LinusParser::getPageContent( $wgLinusFooterPage ); ?>
 
         <div class="pull-right">
