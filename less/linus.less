@@ -182,9 +182,10 @@ h6:hover .mw-editsection {
     left: 100%;
     margin-top: -6px;
     margin-left: -1px;
-    -webkit-border-radius: 0 6px 6px 6px;
-    -moz-border-radius: 0 6px 6px;
-    border-radius: 0 6px 6px 6px;
+    // -webkit-border-radius: 0 6px 6px 6px;
+    // -moz-border-radius: 0 6px 6px;
+    // border-radius: 0 6px 6px 6px;
+	border-radius: @border-radius-base;
 }
 
 .dropdown-submenu:hover>.dropdown-menu {
@@ -200,13 +201,14 @@ h6:hover .mw-editsection {
     border-color: transparent;
     border-style: solid;
     border-width: 5px 0 5px 5px;
-    border-left-color: #ccc;
+    border-left-color: @dropdown-bg;
+	// border-left-color: @dropdown-link-color;
     margin-top: 5px;
     margin-right: -10px;
 }
 
 .dropdown-submenu:hover>a:after {
-    border-left-color: #fff;
+    border-left-color: @dropdown-link-hover-bg;
 }
 
 .dropdown-submenu.pull-left {
@@ -216,7 +218,11 @@ h6:hover .mw-editsection {
 .dropdown-submenu.pull-left>.dropdown-menu {
     left: -100%;
     margin-left: 10px;
-    -webkit-border-radius: 6px 0 6px 6px;
-    -moz-border-radius: 6px 0 6px 6px;
-    border-radius: 6px 0 6px 6px;
+    // -webkit-border-radius: 6px 0 6px 6px;
+    // -moz-border-radius: 6px 0 6px 6px;
+    // border-radius: 6px 0 6px 6px;
+	border-radius: @border-radius-base;
+}
+.dropdown-submenu.dropup {
+	// TODO
 }
