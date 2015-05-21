@@ -20,7 +20,9 @@ class LinusHooks {
 	}
 
 	static function NavSetup( Parser $parser ) {
-		$parser->setHook( 'nav', 'LinusHooks::buildNavigation' );
+		global $wgLinusEnableNavTag;
+		if( $wgLinusEnableNavTag )
+			$parser->setHook( 'nav', 'LinusHooks::buildNavigation' );
 		return true;
 	}
 
@@ -39,7 +41,9 @@ class LinusHooks {
 	}
 
 	static function ButtonsSetup( Parser $parser ) {
-		$parser->setHook( 'buttons', 'LinusHooks::buildButtons' );
+		global $wgLinusEnableButtonsTag;
+		if( $wgLinusEnableButtonsTag )
+			$parser->setHook( 'buttons', 'LinusHooks::buildButtons' );
 		return true;
 	}
 
