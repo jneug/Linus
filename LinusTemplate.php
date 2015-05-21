@@ -25,21 +25,21 @@ class LinusTemplate extends BaseTemplate {
     <a href="#wiki-body" class="sr-only">Skip to main content</a>
     <?php $this->renderNavbar(); ?>
 
-		<main id="wiki-outer-body" class="container">
+	<main id="wiki-outer-body" class="container">
       <div id="wiki-body" class="row">
-  			<?php if ( $wgLinusUseSidebar || $wgLinusTOCInSidebar ): ?>
-				<aside class="col-md-3 col-sm-3 hidden-print sidebar">
+  		<?php if ( $wgLinusUseSidebar || $wgLinusTOCInSidebar ): ?>
+        <aside class="col-md-3 col-sm-3 hidden-print" id="sidebar">
         <?php $this->renderSidebar() ?>
         </aside>
-				<section class="col-md-9 col-sm-9 wiki-body-section">
+		<section class="col-md-9 col-sm-9 wiki-body-section" id="main-content">
         <?php else: ?>
-        <section class="col-md-12 col-sm-12 wiki-body-section">
+        <section class="col-md-12 col-sm-12 wiki-body-section" id="main-content">
   			<?php endif; ?>
 
   				<?php if( $this->data['sitenotice'] ): ?>
-          <!-- siteNotice -->
+                <!-- siteNotice -->
   				<div id="siteNotice" class="alert alert-warning"><?php $this->html('sitenotice') ?></div>
-          <!-- /siteNotice -->
+                  <!-- /siteNotice -->
   				<?php endif; ?>
   				<?php if ( $this->data['undelete'] ): ?>
   				<!-- undelete -->
@@ -67,9 +67,9 @@ class LinusTemplate extends BaseTemplate {
           </article>
 
   				<?php if ( $this->data['catlinks'] ): ?>
-          <!-- catlinks -->
+                <!-- catlinks -->
   				<div class="category-links"><?php $this->html( 'catlinks' ); ?></div>
-          <!-- /catlinks -->
+                  <!-- /catlinks -->
   				<?php endif; ?>
   				<?php if ( $this->data['dataAfterContent'] ): ?>
   				<!-- dataAfterContent -->

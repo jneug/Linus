@@ -17,6 +17,11 @@ $(function() {
 	// Links in alerts
 	$('.alert a').addClass('alert-link');
 
+	// Move toc
+	if( $('#toc') && $('#sidebar') ) {
+		$('#toc').prependTo($('#sidebar'));
+	}
+
 	// Initialize BS components
 	// Init tooltips and popovers
 	$('.tip').tooltip();
