@@ -107,7 +107,7 @@ class LinusTemplate extends BaseTemplate {
     }
 
     ?>
-        <nav class="<?php echo $navbarClasses ?>">
+        <nav class="<?php echo $navbarClasses ?>" id="main-nav">
           <div class="container-fluid">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#linus-navbar-collapse">
@@ -207,7 +207,7 @@ class LinusTemplate extends BaseTemplate {
       $footerClasses = 'footer footer-inverse';
     }
     ?>
-    <footer class="<?php echo $footerClasses ?>">
+    <footer class="<?php echo $footerClasses ?>" id="main-footer">
       <div class="container-fluid">
         <?php echo LinusParser::getPageContent( $wgLinusFooterPage ); ?>
 
