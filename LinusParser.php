@@ -89,6 +89,8 @@ class LinusParser {
           $output .= '<li class="'.($level==0?'navbar-text':'dropdown-header').'">'.LinusParser::getIcon($navItem['icon']).$navItem['text'].'</li>';
         } else {
 	      	$attributes = array('href="'.$navItem['href'].'"');
+            if( isset($navItem['id']) )
+                $attributes[] = 'id="'.$navItem['id'].'"';
 	      	if( isset($navItem['rel']) )
 				$attributes[] = 'rel="'.$navItem['rel'].'"';
 
@@ -305,6 +307,8 @@ class LinusParser {
         'help' => 'book',
         'randompage' => 'random',
         'recentchanges' => 'pencil-square-o',
+        'purge' => 'refresh',
+        'smw-browse' => 'search',
       );
       if( array_key_exists($slug, $icons) ) {
         return 'fa-'.$icons[$slug];
