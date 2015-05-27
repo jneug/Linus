@@ -74,7 +74,8 @@ $wgResourceModules['skins.linus.fontawesome'] = array(
 
 
 $wgLinusUseSidebar = false;
-$wgLinusTOCInSidebar = true;
+$wgLinusTOCInSidebar = false;
+$wgLinusEnableSmoothScroll = true;
 $wgLinusNavbarInverted = false;
 $wgLinusNavbarFixed = true;
 $wgLinusUseFontAwesome = true;

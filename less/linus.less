@@ -53,6 +53,38 @@ body.fixed-navbar .postedit-container {
 		}
 	}
 }
+/* TOC */
+#toc {
+	h2 {
+		font-size: @font-size-h3;
+	}
+
+	ul {
+		list-style: none;
+		padding-left: @toc-padding-left;
+
+		.tocnumber {
+			display: inline-block;
+			width: @toc-number-width;
+		}
+		.toctext {
+
+		}
+	}
+
+	&.affix {
+		max-width: @toc-max-width;
+	}
+}
+// Affix component
+.affix,.affix-top {
+	position: static;
+}
+@media (min-width: @screen-md-min) {
+  .affix {
+    position: fixed;
+  }
+}
 
 // Copied from bootstrap 3.4 to ensure backwards compatiblity
 // (blockquote > small is deprecated)

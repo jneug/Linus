@@ -28,12 +28,12 @@ class LinusTemplate extends BaseTemplate {
 	<main id="wiki-outer-body" class="container">
       <div id="wiki-body" class="row">
   		<?php if ( $wgLinusUseSidebar || $wgLinusTOCInSidebar ): ?>
-        <aside class="col-md-3 col-sm-3 hidden-print" id="sidebar">
+        <aside class="col-md-3 hidden-print" id="sidebar">
         <?php $this->renderSidebar() ?>
         </aside>
-		<section class="col-md-9 col-sm-9 wiki-body-section" id="main-content">
+		<section class="col-md-9 wiki-body-section" id="main-content">
         <?php else: ?>
-        <section class="col-md-12 col-sm-12 wiki-body-section" id="main-content">
+        <section class="col-md-12 wiki-body-section" id="main-content">
   			<?php endif; ?>
 
   				<?php if( $this->data['sitenotice'] ): ?>

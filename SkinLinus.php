@@ -62,11 +62,14 @@ class SkinLinus extends SkinTemplate {
      * @param &$bodyAttrs Array of attributes that will be set on the body element
      */
     function addToBodyAttributes( $out, &$bodyAttrs ) {
-      global $wgLinusNavbarFixed;
+      global $wgLinusNavbarFixed, $wgLinusEnableSmoothScroll;
 
       $bodyClasses = array();
       if( $wgLinusNavbarFixed ) {
         $bodyClasses[] = 'fixed-navbar';
+      }
+      if( $wgLinusEnableSmoothScroll ) {
+          $bodyClasses[] = 'smooth-scroll';
       }
 
       if ( isset( $bodyAttrs['class'] ) && strlen( $bodyAttrs['class'] ) > 0 ) {

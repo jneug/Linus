@@ -24,6 +24,30 @@ $(function() {
 			.affix();
     }
 
+    // Activate Smooth scrolling
+    if( $('body.smooth-scroll') ) {
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+              if (target.length) {
+                $('html,body').animate({
+                  scrollTop: target.offset().top - 50
+              }, 800);
+                return false;
+              }
+            }
+        });
+    }
+
+    // remove sidebar if empty
+    if( $('#sidebar').children().length == 0 ) {
+        $('#sidebar').remove();
+        $('#main-content')
+            .removeClass('col-md-9')
+            .addClass('col-md-12');
+    }
+
     // Initialize BS components
     // Init tooltips and popovers
     $('.tip').tooltip();
