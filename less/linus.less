@@ -116,12 +116,13 @@ blockquote {
 /* Contextual text colors */
 // Need to overwrite colors in text states for some reason
 .text-emphasis-variant-a(@color) {
-  color: @color;
+	color: @color;
 	font-weight: @state-link-weight;
-  a&:hover,
-  a&:focus {
-    color: darken(@color, 10%);
-  }
+
+	&:hover,
+	&:focus {
+		color: darken(@color, 10%);
+	}
 }
 .text-muted a {
 	.text-emphasis-variant-a(@text-muted);
@@ -141,16 +142,38 @@ blockquote {
 .text-info a {
 	.text-emphasis-variant-a(@state-info-text);
 }
+.bg-primary a {
+	color: inherit;
+}
+// .bg-info a,
+// .bg-success a,
+// .bg-danger a,
+// .bg-warning a {
+// 	color: inherit;
+// 	font-weight: @state-link-weight;
+// }
+
+/* Dealing with long URLs */
+.wrap-around() {
+	word-wrap:       break-word;
+	word-break:      break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens:    auto;
+	hyphens:         auto;
+}
+.url {
+	.wrap-around();
+}
 
 .redirectMsg p {
     height: auto;
 }
+
+/* Headlines */
 .pagesubtitle {
     font-size: 1.2em;
     margin-bottom: auto;
 }
-
-/* Headlines */
 .mw-headline {
 	// text-shadow: 1px 1px 0 rgb(255,255,255);
 }
