@@ -68,7 +68,7 @@ class LinusTemplate extends BaseTemplate {
 
   				<?php if ( $this->data['catlinks'] ): ?>
                 <!-- catlinks -->
-  				<div class="category-links"><?php $this->html( 'catlinks' ); ?></div>
+  				<div class="category-links clearfix"><?php $this->html( 'catlinks' ); ?></div>
                   <!-- /catlinks -->
   				<?php endif; ?>
   				<?php if ( $this->data['dataAfterContent'] ): ?>
