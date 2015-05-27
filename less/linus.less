@@ -6,11 +6,11 @@
 body.fixed-navbar {
 	padding-top: @navbar-height * 1.4;
 }
-.postedit-container {
-	z-index: @zindex-modal;
-}
 body.fixed-navbar .postedit-container {
 	top: @navbar-height * 1.1;
+}
+.postedit-container {
+	z-index: @zindex-modal;
 }
 .postedit {
 
@@ -94,15 +94,15 @@ body.fixed-navbar .postedit-container {
 // (blockquote > small is deprecated)
 blockquote {
 	small {
-    display: block;
-    font-size: 80%; // back to default font-size
-    line-height: @line-height-base;
-    color: @blockquote-small-color;
+		display: block;
+		font-size: 80%; // back to default font-size
+		line-height: @line-height-base;
+		color: @blockquote-small-color;
 
-    &:before {
-      content: '\2014 \00A0'; // em dash, nbsp
-    }
-  }
+		&:before {
+			content: '\2014 \00A0'; // em dash, nbsp
+		}
+	}
 }
 .blockquote-reverse {
 	small {
@@ -163,10 +163,6 @@ h2, h3, h4, h5, h6 {
 			opacity: .9;
 		}
 	}
-}
-#wiki-body h2 {
-	border-bottom: 1px solid #ddd;
-	margin-bottom: 0.5em;
 }
 
 /* Editform */

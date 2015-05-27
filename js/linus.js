@@ -48,6 +48,9 @@ $(function() {
             .addClass('col-md-12');
     }
 
+    // Some SMW styling
+    $('.smw-editpage-help').addClass('well').removeClass('smw-editpage-help');
+
     // Initialize BS components
     // Init tooltips and popovers
     $('.tip').tooltip();
