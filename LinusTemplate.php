@@ -208,10 +208,11 @@ class LinusTemplate extends BaseTemplate {
     }
     ?>
     <footer class="<?php echo $footerClasses ?>" id="main-footer">
-      <div class="container-fluid">
+    <div class="container-fluid">
         <?php echo LinusParser::getPageContent( $wgLinusFooterPage ); ?>
-
-        <div class="pull-right">
+    </div>
+    <div class="container-fluid">
+      <div class="pull-right" id="footer-links">
           <?php if( $wgLinusShowFooterLinks ): ?>
           <ul>
             <?php foreach ( $this->getFooterLinks('flat') as $key ): ?>
@@ -226,9 +227,9 @@ class LinusTemplate extends BaseTemplate {
             foreach ( $footericons as $blockName => $footerIcons ) {
               foreach ( $footerIcons as $icon ) {
                 if($wgLinusUseFooterIcons) {
-                  echo $this->getSkin()->makeFooterIcon( $icon );
+                  echo '<span class="footericon">'.$this->getSkin()->makeFooterIcon( $icon ).'</span>';
                 } else {
-                  echo '<span>' . $this->getSkin()->makeFooterIcon( $icon, 'withoutImage' ) . '</span>';
+                  echo '<span class="footerlink">' . $this->getSkin()->makeFooterIcon( $icon, 'withoutImage' ) . '</span>';
                 }
               }
             }

@@ -18,11 +18,11 @@ body.fixed-navbar .postedit-container {
 
 /* Page footer */
 .footer {
-    margin-top: @footer-margin-top;
-    padding-bottom: @footer-padding-vertical / 2;
-    padding-top: @footer-padding-vertical;
-		padding-left: @footer-padding-horizontal;
-		padding-right: @footer-padding-horizontal;
+	margin-top: @footer-margin-top;
+	padding-bottom: floor(@footer-padding-vertical / 2);
+	padding-top: @footer-padding-vertical;
+	padding-left: @footer-padding-horizontal;
+	padding-right: @footer-padding-horizontal;
 }
 .footer-default {
 	color: @footer-default-color;
@@ -53,6 +53,10 @@ body.fixed-navbar .postedit-container {
 		}
 	}
 }
+.footericon {
+	margin-right: floor(@padding-base-horizontal / 2);
+}
+
 /* TOC */
 #toc {
 	h2 {

@@ -20,13 +20,13 @@ class SkinLinus extends SkinTemplate {
      *
   	 * @param OutputPage $out
   	 */
-  	public function initPage( OutputPage $out ) {
-  		parent::initPage( $out );
+     public function initPage( OutputPage $out ) {
+        parent::initPage( $out );
 
   		$out->addMeta( 'X-UA-Compatible', 'IE=edge' );
-      $out->addMeta( 'viewport', 'width=device-width, initial-scale=1, maximum-scale=1' );
+        $out->addMeta( 'viewport', 'width=device-width, initial-scale=1, maximum-scale=1' );
 
-      $out->addScript( '
+        $out->addScript( '
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
