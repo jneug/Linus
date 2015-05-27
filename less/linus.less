@@ -276,4 +276,27 @@ h2, h3, h4, h5, h6 {
 */
 .infobox {
 	float: right !important;
+	margin: 0 0 @infobox-padding-bottom @infobox-padding-left;
+
+	table.table {
+	  	margin-bottom: 0px;
+	  	max-width: @infobox-max-width;
+
+		caption {
+		 	text-align: center;
+			padding: 0;
+			padding-bottom: @padding-xs-vertical;
+		}
+	}
+}
+
+@media (max-width: @screen-sm) {
+	.infobox {
+		float: none !important;
+		margin: @padding-base-vertical @padding-base-horizontal;
+
+		table.table {
+			max-width: 100%;
+		}
+	}
 }
