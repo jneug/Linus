@@ -120,6 +120,12 @@ class LinusTemplate extends BaseTemplate {
             </div>
 
             <div class="collapse navbar-collapse" id="linus-navbar-collapse">
+                <?php if( LinusParser::pageExists($wgLinusTitlebarPage) ): ?>
+                <ul class="nav navbar-nav">
+                  <?php echo LinusParser::nav( LinusParser::getNavigationFromPage($wgLinusTitlebarPage) ) ?>
+                </ul>
+                <?php endif; ?>
+
               <ul class="nav navbar-nav navbar-right">
                 <?php
                 if ( $wgUser->isLoggedIn() ) {
@@ -150,18 +156,12 @@ class LinusTemplate extends BaseTemplate {
                 </li>
               </ul>
 
-              <form class="navbar-form navbar-right" action="<?php $this->text( 'wgScript' ) ?>" id="searchform" role="search">
-                <div class="form-group">
-                  <input class="form-control" type="search" name="search" placeholder="Search" title="Search <?php echo $wgSitename; ?> [ctrl-option-f]" accesskey="f" id="searchInput" autocomplete="off">
-                </div>
-                <input class="btn" type="hidden" name="title" value="Special:Search">
-              </form>
-
-              <?php if( LinusParser::pageExists($wgLinusTitlebarPage) ): ?>
-              <ul class="nav navbar-nav">
-                <?php echo LinusParser::nav( LinusParser::getNavigationFromPage($wgLinusTitlebarPage) ) ?>
-              </ul>
-              <?php endif; ?>
+                <form class="navbar-form navbar-right" action="<?php $this->text( 'wgScript' ) ?>" id="searchform" role="search">
+                  <div class="form-group">
+                    <input class="form-control" type="search" name="search" placeholder="Search" title="Search <?php echo $wgSitename; ?> [ctrl-option-f]" accesskey="f" id="searchInput" autocomplete="off">
+                  </div>
+                  <input class="btn" type="hidden" name="title" value="Special:Search">
+                </form>
             </div><!-- /.collapse.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
