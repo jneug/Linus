@@ -37,8 +37,7 @@ $wgResourceModules['skins.linus.styles'] = array(
 	'styles' => array(
 	    'css/bootstrap.min.css'    => array( 'media' => 'all' ),
 	    'less/linus.less'          => array( 'media' => 'all' ),
-		'less/custom.less'         => array( 'media' => 'all' ),
-		'less/print.less'          => array( 'media' => 'print' ),
+		'less/custom.less'         => array( 'media' => 'all' )
 	),
 	'remoteSkinPath' => 'Linus',
 	'localBasePath' => __DIR__,
@@ -64,7 +63,7 @@ $wgResourceModules['skins.linus.bootstrap-theme'] = array(
 
 $wgResourceModules['skins.linus.fontawesome'] = array(
 	'styles' => array(
-    'css/font-awesome.min.css' => array( ),
+        'css/font-awesome.min.css' => array( ),
 	),
 	'remoteSkinPath' => 'Linus',
 	'localBasePath' => __DIR__,
