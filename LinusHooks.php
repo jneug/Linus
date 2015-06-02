@@ -13,6 +13,24 @@ if ( ! defined( 'MEDIAWIKI' ) ) {
 
 class LinusHooks {
 
+    static function setupHooks() {
+        global $wgHooks;
+
+        $wgHooks['ParserFirstCallInit'][] = 'LinusHooks::NavSetup';
+        $wgHooks['ParserFirstCallInit'][] = 'LinusHooks::ButtonsSetup';
+
+        $wgHooks['EditPageBeforeEditButtons'][] = 'LinusHooks::styleEditButtons';
+    }
+
+    // static function setupSMWHooks() {
+    //     global $wgHooks;
+    //
+    //     // TODO: What to check here to verify SMW is installed?
+    //     if( function_exists('enableSemantics') ) {
+    //         //$wgHooks[''][] = 'LinusHooks::smw';
+    //     }
+    // }
+
 	static function styleEditButtons( &$editpage, &$buttons, &$tabindex ) {
 		$buttons['save'] = substr($buttons['save'],0,-1).' class="btn btn-success">';
 		$buttons['preview'] = substr($buttons['preview'],0,-1).' class="btn btn-primary">';

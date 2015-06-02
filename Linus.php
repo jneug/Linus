@@ -29,9 +29,7 @@ $wgAutoloadClasses['LinusTemplate'] = __DIR__ . '/LinusTemplate.php';
 $wgAutoloadClasses['LinusHooks'] = __DIR__ . '/LinusHooks.php';
 $wgMessagesDirs['Linus'] = __DIR__ . '/i18n';
 
-$wgHooks['ParserFirstCallInit'][] = 'LinusHooks::NavSetup';
-$wgHooks['ParserFirstCallInit'][] = 'LinusHooks::ButtonsSetup';
-$wgHooks['EditPageBeforeEditButtons'][] = 'LinusHooks::styleEditButtons';
+LinusHooks::setupHooks();
 
 // Setup resource modules
 // TODO: Use .less files here?
