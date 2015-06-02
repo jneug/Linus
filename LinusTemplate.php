@@ -17,7 +17,8 @@ class LinusTemplate extends BaseTemplate {
 	 * Outputs the entire contents of the page
 	 */
 	public function execute() {
-    global $wgLinusUseSidebar, $wgLinusTOCInSidebar, $wgLinusHideHeader;
+        global $wgParser;
+        global $wgLinusUseSidebar, $wgLinusTOCInSidebar, $wgLinusHideHeader;
 
 		$this->html( 'headelement' );
     ?>
