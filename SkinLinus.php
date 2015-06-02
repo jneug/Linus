@@ -52,7 +52,7 @@ class SkinLinus extends SkinTemplate {
       if( $wgLinusUseFontAwesome ) {
         $styles[] = 'skins.linus.fontawesome';
       }
-  		$out->addModuleStyles($styles);
+  	   $out->addModuleStyles($styles);
   	}
 
     /**
@@ -62,14 +62,20 @@ class SkinLinus extends SkinTemplate {
      * @param &$bodyAttrs Array of attributes that will be set on the body element
      */
     function addToBodyAttributes( $out, &$bodyAttrs ) {
-      global $wgLinusNavbarFixed, $wgLinusEnableSmoothScroll;
+      global $wgLinusNavbarFixed, $wgLinusNavbarInverted, $wgLinusEnableSmoothScroll, $wgLinusUseFontAwesome;
 
       $bodyClasses = array();
       if( $wgLinusNavbarFixed ) {
         $bodyClasses[] = 'fixed-navbar';
       }
+      if( $wgLinusNavbarInverted ) {
+        $bodyClasses[] = 'inverted-navbar';
+      }
       if( $wgLinusEnableSmoothScroll ) {
           $bodyClasses[] = 'smooth-scroll';
+      }
+      if( $wgLinusUseFontAwesome ) {
+          $bodyClasses[] = 'fa-enabled';
       }
 
       if ( isset( $bodyAttrs['class'] ) && strlen( $bodyAttrs['class'] ) > 0 ) {
