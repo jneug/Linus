@@ -218,6 +218,8 @@ class LinusParser {
         $query = substr($href, strpos($href, '?'));
       }
       if( in_array($keyword, array('self','mainpage')) ) {
+          // global $wgRequest;
+
         switch( $keyword ) {
           case 'self': global $wgTitle; $href = $wgTitle->getLocalURL(); break;
           case 'mainpage': $href = Title::newMainPage()->getLocalURL(); break;
@@ -309,6 +311,10 @@ class LinusParser {
         'recentchanges' => 'pencil-square-o',
         'purge' => 'refresh',
         'smw-browse' => 'search',
+        'nstab-blog' => 'file',
+        'wikilog' => 'pencil-square',
+        'adminlinks' => 'file',
+        'feeds' => 'rss',
       );
       if( array_key_exists($slug, $icons) ) {
         return 'fa-'.$icons[$slug];
