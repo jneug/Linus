@@ -16,6 +16,10 @@ body.fixed-navbar .postedit-container {
 
 }
 
+textarea {
+	width: 100%;
+}
+
 /* Page footer */
 html {
 	// Color html background in footer color, to span footer to bottom of page
@@ -105,6 +109,34 @@ body {
   }
 }
 
+// External links
+a.external {
+	&:after {
+		font-family: 'Glyphicons Halflings';
+		content: "\e164";
+		font-size: 75%;
+		padding-left: 3px;
+	}
+}
+.fa-enabled {
+	a.external {
+		&:after {
+			font-family: 'FontAwesome';
+			content: " \f08e";
+			font-size: 75%;
+			padding-left: 0;
+		}
+	}
+}
+.footer {
+	a.external {
+		&:after {
+			content: "";
+			padding: 0;
+		}
+	}
+}
+
 // Copied from bootstrap 3.4 to ensure backwards compatiblity
 // (blockquote > small is deprecated)
 blockquote {
@@ -132,7 +164,8 @@ blockquote {
 // Need to overwrite colors in text states for some reason
 .text-emphasis-variant-a(@color) {
 	color: @color;
-	font-weight: @state-link-weight;
+	// font-weight: @state-link-weight;
+	text-decoration: underline;
 
 	&:hover,
 	&:focus {
@@ -154,11 +187,12 @@ blockquote {
 .text-warning a {
 	.text-emphasis-variant-a(@state-warning-text);
 }
-.text-info a {
+.text-info a  {
 	.text-emphasis-variant-a(@state-info-text);
 }
 .bg-primary a {
 	color: inherit;
+	text-decoration: underline;
 }
 // .bg-info a,
 // .bg-success a,
@@ -202,6 +236,11 @@ h2, h3, h4, h5, h6 {
 		}
 	}
 }
+.jumbotron {
+	.mw-editsection {
+		display: none;
+	}
+}
 
 /* Editform */
 #wpTextbox1 {
@@ -238,11 +277,51 @@ h2, h3, h4, h5, h6 {
 }
 
 /**
+	Special pages
+**/
+.mw-specialpages-table {
+	margin: 0;
+
+	ul {
+		margin-bottom: (@line-height-computed / 2);
+		font-size: @font-size-base;
+		// padding-left: @mw-specialpages-ul-padding;
+	}
+}
+li.mw-specialpagerestricted {
+	list-style-type: none;
+	margin-left: @font-size-base * -1.2;
+
+	a {
+		margin-left: @font-size-base * .5;
+	}
+}
+.mw-specialpagerestricted {
+	&:before {
+		font-family: 'Glyphicons Halflings';
+		content: "\e033";
+		font-size: 75%;
+		margin-right: 2px;
+	}
+}
+.fa-enabled {
+	.mw-specialpagerestricted {
+		&:before {
+			font-family: 'FontAwesome';
+			content: "\f023";
+			font-size: 75%;
+			margin-right: 2px;
+		}
+	}
+}
+
+/**
     BS3 Multi level dropdown
     http://bootsnipp.com/snippets/featured/multi-level-dropdown-menu-bs3
 */
 .dropdown-submenu {
     position: relative;
+	background-color: inherit;
 
 	// Rotate caret
 	.caret {
@@ -262,6 +341,7 @@ h2, h3, h4, h5, h6 {
 	    margin-top: @padding-base-vertical * -1;
 	    margin-left: -1px;
 		border-radius: @border-radius-base;
+		background-color: inherit;
 	}
 
 	&.pull-left {
@@ -304,7 +384,7 @@ h2, h3, h4, h5, h6 {
 	margin: 0 0 @infobox-padding-bottom @infobox-padding-left;
 
 	table.table {
-	  	margin-bottom: 0px;
+	  	margin-bottom: 0;
 	  	max-width: @infobox-max-width;
 
 		caption {
@@ -319,14 +399,191 @@ h2, h3, h4, h5, h6 {
 	.infobox {
 		float: none !important;
 		margin: @padding-base-vertical @padding-base-horizontal;
+		// margin: 0;
 
 		table.table {
-			max-width: 100%;
+			// max-width: 100%;
+			margin: 0 auto;
 		}
 	}
 }
+
+
+/**
+	Some styles for SMW
+**/
+.smw-factbox {
+	margin-top: @padding-large-vertical;
+	padding: @padding-small-vertical @padding-small-horizontal;
+	border: 1px solid @well-border;
+	border-radius: @border-radius-small;
+	// background-color: @well-bg;
+
+	* {
+		font-size: @font-size-small;
+	}
+
+	.smwfactboxhead {
+		font-size: @font-size-h6;
+		* {
+			font-size: inherit;
+		}
+	}
+
+	.table {
+		margin-bottom: 0;
+	}
+}
+
 /**
 	Printing
 **/
 @media print {
+}
+
+.table-noborder {
+  // Cells
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        border-top: 0;
+      }
+    }
+  }
+}
+
+/**
+	MediaWiki Forms
+**/
+td.mw-input, td.mw-label {
+	padding: 0;
+	padding-top: @padding-small-vertical;
+	vertical-align: middle !important;
+}
+.mw-label {
+	// padding-right: @padding-small-horizontal;
+	// text-align: left !important;
+	font-weight: bold;
+	padding-right: @padding-small-horizontal !important;
+
+	label {
+		margin: 0;
+		font-weight: inherit;
+	}
+}
+
+.form-control-styles() {
+	display: block;
+	width: 100%;
+	height: @input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+	padding: @padding-base-vertical @padding-base-horizontal;
+	font-size: @font-size-base;
+	line-height: @line-height-base;
+	color: @input-color;
+	background-color: @input-bg;
+	background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+	border: 1px solid @input-border;
+	border-radius: @input-border-radius; // Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS.
+}
+.mw-input {
+	textarea, select {
+		.form-control-styles();
+	}
+
+	// Reset height for `textarea`s
+	textarea {
+		height: auto;
+	}
+}
+.mw-ui-input {
+	.form-control-styles();
+
+	// Reset height for `textarea`s
+	textarea& {
+		height: auto;
+	}
+}
+
+.mw-htmlform-flatlist-item {
+	position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mw-htmlform-flatlist-item + .mw-htmlform-flatlist-item {
+  margin-top: -5px; // Move up sibling radios or checkboxes for tighter spacing
+}
+
+.mw-htmlform-flatlist-item > input[type="radio"],
+.mw-htmlform-flatlist-item > input[type="checkbox"],
+.mw-input > input[type="checkbox"] {
+  position: relative;
+  margin-top: 4px \9;
+}
+.mw-htmlform-flatlist-item > label,
+.mw-input > input[type="checkbox"] + label {
+	min-height: @line-height-computed; // Ensure the input doesn't jump when there is no text
+	padding-left: @padding-xs-horizontal;
+	margin-bottom: 0;
+	font-weight: normal;
+	cursor: pointer;
+}
+.editCheckboxes > label {
+	cursor: pointer;
+}
+
+.mw-htmlform-submit-buttons {
+	margin-top: @padding-small-vertical;
+}
+
+.htmlform-tip {
+	// Size it appropriately next to real form controls
+	padding-top: (@padding-base-vertical + 1);
+	padding-bottom: (@padding-base-vertical + 1);
+	// Remove default margin from `p`
+	margin-bottom: 0;
+	min-height: (@line-height-computed + @font-size-base);
+	color: @state-info-text;
+
+	a {
+		.text-emphasis-variant-a(@state-info-text);
+	}
+
+	&:before {
+			font-family: 'Glyphicons Halflings';
+			content: "\e086";
+			margin-right: 2px;
+	}
+}
+
+.fa-enabled {
+	.htmlform-tip {
+		&:before {
+				font-family: 'FontAwesome';
+				content: "\f05a ";
+		}
+	}
+}
+
+
+
+/**
+	Tabs in preferences
+	Copied from Bootstrap navs.less
+**/
+.nav-pills {
+  > li {
+	&.selected > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @nav-pills-active-link-hover-color;
+        background-color: @nav-pills-active-link-hover-bg;
+      }
+    }
+  }
 }
