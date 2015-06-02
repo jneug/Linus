@@ -208,12 +208,17 @@ class LinusTemplate extends BaseTemplate {
       $footerClasses = 'footer footer-inverse';
     }
     ?>
-    <footer class="<?php echo $footerClasses ?>" id="main-footer">
-    <div class="container-fluid">
+    <footer class="<?php echo $footerClasses ?> container-fluid" id="main-footer">
+    <div class="row">
         <?php echo LinusParser::getPageContent( $wgLinusFooterPage ); ?>
     </div>
-    <div class="container-fluid">
-      <div class="pull-right" id="footer-links">
+    <div class="row">
+        <div class="col-md-8">
+        <?php if( LinusParser::pageExists( $wgLinusCopyrightPage ) ): ?>
+        <p class="copyright"><?php echo LinusParser::getPageContent( $wgLinusCopyrightPage ) ?></p>
+        <?php endif; ?>
+    </div>
+      <div class="col-md-4" id="footer-links">
           <?php if( $wgLinusShowFooterLinks ): ?>
           <ul>
             <?php foreach ( $this->getFooterLinks('flat') as $key ): ?>
@@ -237,10 +242,6 @@ class LinusTemplate extends BaseTemplate {
           }
           ?>
         </div>
-
-        <?php if( LinusParser::pageExists( $wgLinusCopyrightPage ) ): ?>
-        <p class="copyright"><?php echo LinusParser::getPageContent( $wgLinusCopyrightPage ) ?></p>
-        <?php endif; ?>
       </div><!-- container -->
     </footer><!-- footer -->
     <?php
