@@ -278,6 +278,11 @@ class LinusParser {
 
     if( $wgLinusUseFontAwesome ) {
       $icons = array(
+        'nstab-main' => 'file',
+        'nstab-mediawiki' => 'file',
+        'nstab-template' => 'file',
+        'nstab-user' => 'user',
+
         'personal_urls' => 'user',
         'content_actions' => 'file',
         'toolbox' => 'cog',
@@ -290,9 +295,6 @@ class LinusParser {
         'mycontris' => 'list-alt',
         'logout' => 'sign-out',
         'login' => 'sign-in',
-        'nstab-main' => 'file',
-        'nstab-mediawiki' => 'file',
-        'nstab-template' => 'file',
         'talk' => 'comment',
         'edit' => 'edit',
         'history' => 'clock-o',
@@ -315,6 +317,10 @@ class LinusParser {
         'wikilog' => 'pencil-square',
         'adminlinks' => 'file',
         'feeds' => 'rss',
+        'contributions' => 'list',
+        'log' => 'terminal',
+        'blockip' => 'ban',
+        'userrights' => 'unlock-alt'
       );
       if( array_key_exists($slug, $icons) ) {
         return 'fa-'.$icons[$slug];
