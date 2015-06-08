@@ -73,6 +73,7 @@ $wgLinusUseFooterIcons = true;
 $wgLinusHideActionsForAnon = true;
 $wgLinusEnableNavTag = true;
 $wgLinusEnableButtonsTag = true;
+$wgLinusResponsiveCategories = true;
 
 // TODO: Add settings for footer/header/navbar/... classes
 // $wgLinusClassFooter = 'navbar navbar-inverse';

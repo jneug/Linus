@@ -20,6 +20,7 @@ class LinusHooks {
         $wgHooks['ParserFirstCallInit'][] = 'LinusHooks::ButtonsSetup';
 
         $wgHooks['EditPageBeforeEditButtons'][] = 'LinusHooks::styleEditButtons';
+        $wgHooks['ArticleFromTitle'][] = 'LinusHooks::onArticleFromTitle';
     }
 
     // static function setupSMWHooks() {
@@ -30,6 +31,14 @@ class LinusHooks {
     //         //$wgHooks[''][] = 'LinusHooks::smw';
     //     }
     // }
+
+  static function onArticleFromTitle( Title &$title, &$article, $context ) {
+    global $wgLinusResponsiveCategories;
+    if ( $wgLinusResponsiveCategories && $title->getNamespace() == NS_CATEGORY ) {
+       $article = new LinusCategoryPage( $title );
+   }
+   return true;
+  }
 
 	static function styleEditButtons( &$editpage, &$buttons, &$tabindex ) {
 		$buttons['save'] = substr($buttons['save'],0,-1).' class="btn btn-success">';
@@ -84,4 +93,72 @@ class LinusHooks {
 		return $output;
 	}
 
+}
+
+class LinusCategoryPage extends CategoryPage {
+   protected $mCategoryViewerClass = 'LinusCategoryViewer';
+}
+
+class LinusCategoryViewer extends CategoryViewer {
+  function formatList( $articles, $articles_start_char, $cutoff = 6 ) {
+    $list = $this->columnLayout( $articles, $articles_start_char );
+
+    $pageLang = $this->title->getPageLanguage();
+    $attribs = array( 'lang' => $pageLang->getCode(), 'dir' => $pageLang->getDir(),
+      'class' => 'mw-content-' . $pageLang->getDir() );
+    $list = Html::rawElement( 'div', $attribs, $list );
+
+    return $list;
+  }
+
+  function columnLayout( $articles, $articles_start_char ) {
+    $columns = array_combine( $articles, $articles_start_char );
+		# Split into three columns
+		$columns = array_chunk( $columns, ceil( count( $columns ) / 3 ), true /* preserve keys */ );
+
+		$ret = '<div class="row">'."\n";
+		$prevchar = null;
+
+		foreach ( $columns as $column ) {
+      $ret .= '<div class="col-md-4 col-sm-6">';
+			$colContents = array();
+
+			# Kind of like array_flip() here, but we keep duplicates in an
+			# array instead of dropping them.
+			foreach ( $column as $article => $char ) {
+				if ( !isset( $colContents[$char] ) ) {
+					$colContents[$char] = array();
+				}
+				$colContents[$char][] = $article;
+			}
+
+			$first = true;
+			foreach ( $colContents as $char => $articles ) {
+				# Change space to non-breaking space to keep headers aligned
+				$h3char = $char === ' ' ? '&#160;' : htmlspecialchars( $char );
+
+				if ( $first && $char === $prevchar ) {
+          $ret .= '<h3 class="hidden-xs">' . $h3char;
+					# We're continuing a previous chunk at the top of a new
+					# column, so add " cont." after the letter.
+					$ret .= ' ' . wfMessage( 'listingcontinuesabbrev' )->escaped();
+				} else {
+          $ret .= '<h3>' . $h3char;
+        }
+				$ret .= "</h3>\n";
+
+				$ret .= '<ul><li>';
+				$ret .= implode( "</li>\n<li>", $articles );
+				$ret .= '</li></ul>';
+
+				$first = false;
+				$prevchar = $char;
+			}
+
+			$ret .= "</div>\n";
+		}
+
+		$ret .= '</div>';
+		return $ret;
+  }
 }
