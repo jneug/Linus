@@ -53,14 +53,6 @@ $wgResourceModules['skins.linus.scripts'] = array(
 	'localBasePath' => __DIR__,
 );
 
-$wgResourceModules['skins.linus.bootstrap-theme'] = array(
-	'styles' => array(
-		'css/bootstrap-theme.min.css' => array( 'media' => 'screen' ),
-	),
-	'remoteSkinPath' => 'Linus',
-	'localBasePath' => __DIR__,
-);
-
 $wgResourceModules['skins.linus.fontawesome'] = array(
 	'styles' => array(
         'css/font-awesome.min.css' => array( ),
@@ -76,7 +68,6 @@ $wgLinusEnableSmoothScroll = true;
 $wgLinusNavbarInverted = false;
 $wgLinusNavbarFixed = true;
 $wgLinusUseFontAwesome = true;
-$wgLinusUseBootstrapTheme = false; // TODO: Remove theme?
 $wgLinusShowFooterLinks = false;
 $wgLinusUseFooterIcons = true;
 $wgLinusHideActionsForAnon = true;

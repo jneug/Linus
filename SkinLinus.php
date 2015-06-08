@@ -41,14 +41,11 @@ class SkinLinus extends SkinTemplate {
   	 * @param $out OutputPage
   	 */
   	function setupSkinUserCss( OutputPage $out ) {
-      global $wgLinusUseFontAwesome, $wgLinusUseBootstrapTheme;
+      global $wgLinusUseFontAwesome;
 
   		parent::setupSkinUserCss( $out );
 
       $styles = array('skins.linus.styles');
-      if( $wgLinusUseBootstrapTheme ) {
-        $styles[] = 'skins.linus.bootstrap-theme';
-      }
       if( $wgLinusUseFontAwesome ) {
         $styles[] = 'skins.linus.fontawesome';
       }
