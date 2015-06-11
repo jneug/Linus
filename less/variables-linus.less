@@ -8,7 +8,11 @@
 //== General
 //
 //##
-@state-link-weight: 600;
+@state-link-weight:               600;
+
+@icon-fixed-width:                1.28571429em; // (.fa-fw)
+@icon-fixed-margin:               2.14285714em; // (.fa-li)
+@icon-fixed-top:                  0.14285714em; // (.fa-li)
 
 //== ToC
 //
@@ -20,9 +24,23 @@
 //== Infobox
 //
 //##
+@infobox-bg:                        @table-bg;
+@infobox-border-color:              @table-border-color;
+
 @infobox-padding-bottom:            @padding-base-vertical;
 @infobox-padding-left:              @padding-base-horizontal;
 @infobox-max-width:                 360px;
+
+// th cells
+@infobox-head-bg:                   @table-bg-active;
+// .infobox-header
+@infobox-header-bg:                 @table-bg-active;
+@infobox-header-size:               @font-size-large;
+// .infobox-muted
+@infobox-muted-bg:                  @table-bg-accent;
+@infobox-muted-color:               @text-muted;
+@infobox-muted-size:                @font-size-small;
+@infobox-muted-style:               italic;
 
 //== Footer
 //
@@ -33,15 +51,15 @@
 @footer-padding-horizontal:        floor((@grid-gutter-width / 2));
 @footer-padding-vertical:          2em;
 
-@footer-default-color:             @gray-light;
-@footer-default-bg:                @gray-lighter;
-@footer-default-border:            @gray-light;
+@footer-default-bg:                desaturate(lighten(@navbar-default-bg, 66%), 66%);//@gray-lighter;
+@footer-default-color:             darken(@footer-default-bg, 50%);// @gray-light;
+@footer-default-border:            darken(@footer-default-color, 10%);
 
 // Footer links
-@footer-default-link-color:                @gray;
-@footer-default-link-hover-color:          @gray-dark;
+@footer-default-link-color:                darken(@footer-default-color, 5%);
+@footer-default-link-hover-color:          darken(@footer-default-link-color, 10%);
 @footer-default-link-hover-bg:             none;
-@footer-default-link-active-color:         @gray;
+@footer-default-link-active-color:         @footer-default-link-color;
 @footer-default-link-active-bg:            none;
 @footer-default-link-disabled-color:       @footer-default-color;
 @footer-default-link-disabled-bg:          none;
@@ -49,15 +67,15 @@
 
 //=== Inverted footer
 // Reset inverted footer basics
-@footer-inverse-color:             @gray-dark;
-@footer-inverse-bg:                @gray-lighter;
-@footer-inverse-border:            @gray-dark;
+@footer-inverse-bg:                @gray-lighter; //desaturate(lighten(@navbar-inverse-bg, 50%), 66%);
+@footer-inverse-color:             @gray-light; //darken(@footer-inverse-bg, 50%);
+@footer-inverse-border:            @gray-light; //darken(@footer-inverse-color, 10%);
 
 // Inverted footer links
-@footer-inverse-link-color:                @gray-darker;
-@footer-inverse-link-hover-color:          @gray-darker;
+@footer-inverse-link-color:                darken(@footer-inverse-color, 5%);
+@footer-inverse-link-hover-color:          darken(@footer-inverse-link-color, 10%);
 @footer-inverse-link-hover-bg:             none;
-@footer-inverse-link-active-color:         @gray-dark;
+@footer-inverse-link-active-color:         @footer-inverse-link-color;
 @footer-inverse-link-active-bg:            none;
 @footer-inverse-link-disabled-color:       @footer-inverse-color;
 @footer-inverse-link-disabled-bg:          none;

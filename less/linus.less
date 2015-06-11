@@ -16,10 +16,6 @@ body.fixed-navbar .postedit-container {
 
 }
 
-textarea {
-	width: 100%;
-}
-
 /* Page footer */
 html {
 	// Color html background in footer color, to span footer to bottom of page
@@ -136,6 +132,14 @@ a.external {
 		}
 	}
 }
+a.new {
+	color: @state-danger-text;
+
+	&:focus,
+	&:hover {
+		color: darken(@state-danger-text, 10%);
+	}
+}
 
 // Copied from bootstrap 3.4 to ensure backwards compatiblity
 // (blockquote > small is deprecated)
@@ -202,6 +206,30 @@ blockquote {
 // 	font-weight: @state-link-weight;
 // }
 
+#wiki-body {
+	// Overwrite wiki styles for lists
+	.mw-content-ltr,
+	.mw-content-rtl {
+		ul,
+		ol {
+		  margin-top: 0;
+		  margin-bottom: (@line-height-computed / 2);
+		  ul,
+		  ol {
+		    margin-bottom: 0;
+		  }
+		}
+	}
+}
+
+@media (max-width: @screen-xs-max) {
+	.row .jumbotron {
+		border-radius: 0 !important;
+		margin-left: floor((@grid-gutter-width / -2));
+		margin-right: ceil((@grid-gutter-width / -2));
+	}
+}
+
 /* Dealing with long URLs */
 .wrap-around() {
 	word-wrap:       break-word;
@@ -223,12 +251,32 @@ blockquote {
     font-size: 1.2em;
     margin-bottom: auto;
 }
-.mw-headline {
-	// text-shadow: 1px 1px 0 rgb(255,255,255);
-}
 h2, h3, h4, h5, h6 {
 	.mw-editsection {
-		opacity: .6;
+		opacity: .4;
+		vertical-align: middle;
+
+		.mw-editsection-bracket {
+			display: none;
+		}
+
+		a {
+			padding: @padding-xs-vertical @padding-xs-horizontal;
+			border: 1px solid @gray-light;
+			background-color: @gray-lighter;
+			border-radius: @border-radius-small;
+
+			&:after {
+				font-family: 'Glyphicons Halflings';
+				content: "\270f";
+				font-size: 75%;
+				padding-left: 3px;
+			}
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
 	}
 	&:hover {
 		.mw-editsection {
@@ -273,9 +321,36 @@ h2, h3, h4, h5, h6 {
 }
 
 // Category Page
+.catcolumns {
+	-moz-columns:    3;
+	-webkit-columns: 3;
+	columns:         3;
+}
+@media (max-width: @screen-sm-max) {
+	.catcolumns {
+		-moz-columns:    2;
+		-webkit-columns: 2;
+		columns:         2;
+	}
+}
 @media (max-width: @screen-xs-max) {
 	h3.hidden-xs + ul {
 		margin-top: 0;
+	}
+	.catcolumns {
+		-moz-columns:    1;
+		-webkit-columns: 1;
+		columns:         1;
+	}
+}
+.catrow > div.col-sm-6 {
+	a {
+		padding: @padding-base-vertical @padding-base-horizontal;
+		display: block;
+
+		&:hover {
+				background: @list-group-hover-bg;
+		}
 	}
 }
 
@@ -286,29 +361,37 @@ h2, h3, h4, h5, h6 {
 /**
 	Special pages
 **/
-.mw-specialpages-table {
+.mw-specialpages-table,
+.mw-specialpages-notes {
 	margin: 0;
 
 	ul {
-		margin-bottom: (@line-height-computed / 2);
-		font-size: @font-size-base;
-		// padding-left: @mw-specialpages-ul-padding;
+		// margin-bottom: (@line-height-computed / 2);
+		// font-size: @font-size-base;
+		margin-left: @icon-fixed-margin;
+		padding-left: 0;
 	}
 }
-li.mw-specialpagerestricted {
+.mw-specialpages-notes ul li:last-of-type {
 	list-style-type: none;
-	margin-left: @font-size-base * -1.2;
-
-	a {
-		margin-left: @font-size-base * .5;
-	}
 }
 .mw-specialpagerestricted {
+	position: relative;
+
+	li& {
+		list-style-type: none;
+	}
+
 	&:before {
 		font-family: 'Glyphicons Halflings';
 		content: "\e033";
-		font-size: 75%;
-		margin-right: 2px;
+
+		font-size: .9em;
+		position: absolute;
+		left: @icon-fixed-margin * -1;
+		width: @icon-fixed-margin;
+		top: @icon-fixed-top;
+		text-align: center;
 	}
 }
 .fa-enabled {
@@ -316,8 +399,6 @@ li.mw-specialpagerestricted {
 		&:before {
 			font-family: 'FontAwesome';
 			content: "\f023";
-			font-size: 75%;
-			margin-right: 2px;
 		}
 	}
 }
@@ -382,27 +463,68 @@ li.mw-specialpagerestricted {
 	}
 }
 
+// Copied from font-awesome.css .fa
+.i-blank {
+	  display: inline-block;
+	  font-size: inherit;
+}
+// Copied from font-awesome.css .fa-fw
+.i-fw {
+  width: @icon-fixed-width;
+  text-align: center;
+}
 
 /**
 	BS3 style Info-Box for MediaWiki
 */
 .infobox {
+	position: relative;
 	float: right !important;
 	margin: 0 0 @infobox-padding-bottom @infobox-padding-left;
 
-	table.table {
-	  	margin-bottom: 0;
-	  	max-width: @infobox-max-width;
+	.table {
+	  margin-bottom: 0;
+		background-color: @infobox-bg;
+		max-width: @infobox-max-width;
+		border: 1px solid @infobox-border-color;
 
 		caption {
 		 	text-align: center;
 			padding: 0;
 			padding-bottom: @padding-xs-vertical;
 		}
+
+		th {
+			background-color: @infobox-head-bg;
+			font-weight: bold;
+			border: 1px solid @infobox-border-color;
+		}
+
+		td {
+			border: 1px solid @infobox-border-color;
+		}
+
+		.infobox-header {
+			text-align: center;
+			font-weight: bold;
+			background-color: @infobox-header-bg;
+			font-size: @infobox-header-size;
+		}
+
+		.infobox-muted {
+			background-color: @infobox-muted-bg;
+			color: @infobox-muted-color;
+			font-size: @infobox-muted-size;
+			font-style: @infobox-muted-style;
+
+			a {
+				.text-emphasis-variant-a(@text-muted);
+			}
+		}
 	}
 }
 
-@media (max-width: @screen-sm) {
+@media (max-width: @screen-sm-max) {
 	.infobox {
 		float: none !important;
 		margin: @padding-base-vertical @padding-base-horizontal;
@@ -437,6 +559,12 @@ li.mw-specialpagerestricted {
 		}
 	}
 
+	.smwrdflink {
+		float: right;
+		font-size: @font-size-small;
+		padding: 0;
+	}
+
 	.table {
 		margin-bottom: 0;
 	}
@@ -465,6 +593,9 @@ li.mw-specialpagerestricted {
 /**
 	MediaWiki Forms
 **/
+textarea {
+	width: 100%;
+}
 td.mw-input, td.mw-label {
 	padding: 0;
 	padding-top: @padding-small-vertical;
