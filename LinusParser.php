@@ -259,10 +259,12 @@ class LinusParser {
 
   static public function getIcon( $icon ) {
     if( !empty($icon) ) {
-      if( substr($icon, 0, 3) == 'fa-' ) {
+      if( $icon == '-') {
+        return '<span class="i-blank i-fw"></span> ';
+      } if( substr($icon, 0, 3) == 'fa-' ) {
         $icon = '<i class="fa fa-fw '.$icon.'"></i> ';
       } else {
-        $icon = '<span class="glyphicon fa-fw glyphicon-'.$icon.'"></span> ';
+        $icon = '<span class="glyphicon i-fw glyphicon-'.$icon.'"></span> ';
       }
     }
     return $icon;
@@ -274,14 +276,24 @@ class LinusParser {
 
   // TODO: Put this into i18n-files?
   static private function _getIconFor( $slug ) {
-    global $wgLinusUseFontAwesome;
+    $message = wfMessage('Icon:'.$slug);
+    if( $message->exists() ) {
+      if( $message->isBlank() )
+        return '';
+      elseif ($message->isDisabled())
+        return '-';
+      else
+        return $message->escaped();
+    }
 
+    global $wgLinusUseFontAwesome;
     if( $wgLinusUseFontAwesome ) {
       $icons = array(
         'nstab-main' => 'file',
         'nstab-mediawiki' => 'file',
         'nstab-template' => 'file',
         'nstab-user' => 'user',
+        'nstab-category' => 'align-left',
 
         'personal_urls' => 'user',
         'content_actions' => 'file',
