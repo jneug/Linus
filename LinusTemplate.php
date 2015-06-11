@@ -93,7 +93,7 @@ class LinusTemplate extends BaseTemplate {
 
 
   protected function renderNavbar() {
-    global $wgSitename, $wgSitenameshort, $wgUser, $wgEnableUploads;
+    global $wgLogo, $wgSitename, $wgSitenameshort, $wgUser, $wgEnableUploads;
     global $wgLinusNavbarInverted, $wgLinusNavbarFixed,
               $wgLinusTitlebarPage, $wgLinusHideActionsForAnon;
 
@@ -117,7 +117,7 @@ class LinusTemplate extends BaseTemplate {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="<?php echo $this->data['nav_urls']['mainpage']['href'] ?>" title="<?php echo $wgSitename ?>"><?php echo isset( $wgLogo ) && $wgLogo ? "<img src='{$wgLogo}' alt='Logo'/> " : ''; echo isset($wgSitenameshort) ? $wgSitenameshort : $wgSitename; ?></a>
+              <a class="navbar-brand" href="<?php echo $this->data['nav_urls']['mainpage']['href'] ?>" title="<?php echo $wgSitename ?>"><?php echo isset( $wgLogo ) && $wgLogo ? '<img src="'.$wgLogo.'" alt="Logo"/> ' : (isset($wgSitenameshort) ? $wgSitenameshort : $wgSitename); ?></a>
             </div>
 
             <div class="collapse navbar-collapse" id="linus-navbar-collapse">
