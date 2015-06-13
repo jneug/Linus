@@ -67,6 +67,7 @@ $wgLinusTOCInSidebar = false;
 $wgLinusEnableSmoothScroll = true;
 $wgLinusNavbarInverted = false;
 $wgLinusNavbarFixed = true;
+$wgSitenameshort = null;
 $wgLinusUseFontAwesome = false;
 $wgLinusShowFooterLinks = false;
 $wgLinusUseFooterIcons = true;
