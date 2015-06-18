@@ -28,6 +28,7 @@ $wgAutoloadClasses['LinusParser'] = __DIR__ . '/LinusParser.php';
 $wgAutoloadClasses['LinusTemplate'] = __DIR__ . '/LinusTemplate.php';
 $wgAutoloadClasses['LinusHooks'] = __DIR__ . '/LinusHooks.php';
 $wgMessagesDirs['Linus'] = __DIR__ . '/i18n';
+$wgExtensionMessagesFiles['LinusMagic'] = __DIR__ . '/LinusMagic.php';
 
 LinusHooks::setupHooks();
 

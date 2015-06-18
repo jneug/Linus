@@ -19,6 +19,8 @@ class LinusHooks {
         $wgHooks['ParserFirstCallInit'][] = 'LinusHooks::NavSetup';
         $wgHooks['ParserFirstCallInit'][] = 'LinusHooks::ButtonsSetup';
 
+        $wgHooks['ParserBeforeTidy'][] = 'LinusHooks::parseMagicWords';
+
         $wgHooks['EditPageBeforeEditButtons'][] = 'LinusHooks::styleEditButtons';
         $wgHooks['ArticleFromTitle'][] = 'LinusHooks::onArticleFromTitle';
     }
@@ -44,6 +46,21 @@ class LinusHooks {
 		$buttons['save'] = substr($buttons['save'],0,-1).' class="btn btn-success">';
 		$buttons['preview'] = substr($buttons['preview'],0,-1).' class="btn btn-primary">';
 		$buttons['diff'] = substr($buttons['diff'],0,-1).' class="btn btn-primary">';
+	}
+
+  static function parseMagicWords( Parser &$parser, &$text ) {
+    if( MagicWord::get( 'LINUS_NOSIDEBAR' )->matchAndRemove( $text ) ) {
+      global $wgLinusUseSidebar;
+      $wgLinusUseSidebar = false;
+    }
+    if( MagicWord::get( 'LINUS_NOTITLE' )->matchAndRemove( $text ) ) {
+      global $wgLinusHideHeader;
+      $wgLinusHideHeader[] = $parser->getTitle()->getText();
+    }
+
+    $parser->disableCache();
+
+		return true;
 	}
 
 	static function NavSetup( Parser $parser ) {
