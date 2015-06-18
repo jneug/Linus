@@ -342,7 +342,8 @@ class LinusParser {
         'contributions' => 'list',
         'log' => 'terminal',
         'blockip' => 'ban',
-        'userrights' => 'unlock-alt'
+        'userrights' => 'unlock-alt',
+        'viewsource' => 'file-text-o',
       );
       if( array_key_exists($slug, $icons) ) {
         return 'fa-'.$icons[$slug];
