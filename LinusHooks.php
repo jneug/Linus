@@ -50,8 +50,9 @@ class LinusHooks {
 
   static function parseMagicWords( Parser &$parser, &$text ) {
     if( MagicWord::get( 'LINUS_NOSIDEBAR' )->matchAndRemove( $text ) ) {
-      global $wgLinusUseSidebar;
+      global $wgLinusUseSidebar,$wgLinusTOCInSidebar;
       $wgLinusUseSidebar = false;
+      $wgLinusTOCInSidebar = false;
     }
     if( MagicWord::get( 'LINUS_NOTITLE' )->matchAndRemove( $text ) ) {
       global $wgLinusHideHeader;
