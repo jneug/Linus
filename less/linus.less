@@ -72,34 +72,61 @@ body {
 	margin-right: floor(@padding-base-horizontal / 2);
 }
 
-/* TOC */
-#toc {
+/* Sidebar */
+#sidebar {
 	h2 {
-		font-size: @font-size-h3;
+		font-size: 1.2em;
 	}
 
+	.nav-pills {
+		li {
+			a {
+				font-size: .9em;
+				padding: @padding-small-vertical @padding-small-horizontal;
+				border-radius: @border-radius-small;
+			}
+		}
+	}
+}
+
+/* TOC */
+#toc {
 	ul {
-		list-style: none;
-		padding-left: @toc-padding-left;
+		// list-style: none;
+		// padding-left: @toc-padding-left;
 
 		.tocnumber {
-			display: inline-block;
-			width: @toc-number-width;
+			// display: inline-block;
+			// width: @toc-number-width;
 		}
 		.toctext {
 
 		}
 	}
 
-	&.affix {
-		max-width: @toc-max-width;
+	width: 100%;
+	background-color: @body-bg;
+
+	&.affix, &.affix-bottom {
+		-webkit-box-shadow: @toc-affix-shadow;
+		-moz-box-shadow:    @toc-affix-shadow;
+		box-shadow:         @toc-affix-shadow;
+		z-index: 						@zindex-navbar;
+		border-radius: 			@border-radius-base;
 	}
 }
 // Affix component
 .affix,.affix-top {
 	position: static;
 }
+.affix-bottom {
+	position: relative;
+	bottom: 0;
+}
 @media (min-width: @screen-md-min) {
+	#toc {
+		width: @toc-max-width;
+	}
   .affix {
     position: fixed;
   }
@@ -320,7 +347,7 @@ h2, h3, h4, h5, h6 {
 	border-left: none;
 }
 
-// Category Page
+// responsive category pages rendered with LinusCategoryViewer::columnLayout
 .catcolumns {
 	-moz-columns:    3;
 	-webkit-columns: 3;
@@ -528,7 +555,6 @@ h2, h3, h4, h5, h6 {
 	.infobox {
 		float: none !important;
 		margin: @padding-base-vertical @padding-base-horizontal;
-		// margin: 0;
 
 		table.table {
 			// max-width: 100%;

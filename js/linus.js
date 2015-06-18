@@ -26,9 +26,28 @@ $(function() {
     // Move toc
     if( $('#sidebar') ) {
         if ($('#toc')) {
-          $('#toc')
+          // read the top padding from the body element (to adjust to fixed navbar)
+          // Used in scrollspy and smoothscrolling
+          var padTop = $('body').css('padding-top');
+          if( padTop.substr(-2) == 'px' )
+            padTop = padTop.substr(0, padTop.length-2);
+          padTop = Number(padTop);
+
+          var $toc = $('#toc')
             .prependTo($('#sidebar'))
-            .affix();
+            .wrap('<div id="toc-spacer"></div>')
+            .affix({
+              offset: {
+                top: 1,
+                bottom: $('.footer').outerHeight()
+              }
+            });
+          $toc.find('ul').addClass('nav nav-pills nav-stacked');
+          $('#toc-spacer').height( $toc.outerHeight() );
+          $('body').scrollspy({
+            target: '#toc',
+            offset: padTop
+          });
 
           // Activate Smooth scrolling
           if( $('body.smooth-scroll') ) {
@@ -38,7 +57,7 @@ $(function() {
                   target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
                   if (target.length) {
                     $('html,body').animate({
-                      scrollTop: target.offset().top - 50
+                      scrollTop: target.offset().top - padTop
                   }, 800);
                     return false;
                   }
