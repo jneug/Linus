@@ -27,10 +27,25 @@ $wgAutoloadClasses['SkinLinus'] = __DIR__ . '/SkinLinus.php';
 $wgAutoloadClasses['LinusParser'] = __DIR__ . '/LinusParser.php';
 $wgAutoloadClasses['LinusTemplate'] = __DIR__ . '/LinusTemplate.php';
 $wgAutoloadClasses['LinusHooks'] = __DIR__ . '/LinusHooks.php';
+$wgAutoloadClasses['ResponsiveCategory'] = __DIR__ . '/LinusSMW.php';
 $wgMessagesDirs['Linus'] = __DIR__ . '/i18n';
 $wgExtensionMessagesFiles['LinusMagic'] = __DIR__ . '/LinusMagic.php';
 
 LinusHooks::setupHooks();
+
+$wgExtensionFunctions[] = 'setupSMWextensions';
+function setupSMWextensions() {
+  if( defined( 'SMW_VERSION' ) ) {
+    global $smwgResultFormats, $smwgResultAliases;
+    $smwgResultFormats['responsive_category'] = 'ResponsiveCategory';
+    $smwgResultAliases['responsive_category'] = array('responsive category','rcategory');
+
+    // $smwgResultFormats['buttons'] = 'LinusSMW_Buttons';
+    // $smwgResultFormats['nav'] = 'LinusSMW_Nav';
+
+    // echo '<pre>'; var_dump($smwgResultFormats); die('</pre>');
+  }
+}
 
 // Setup resource modules
 // TODO: Use .less files here?
@@ -73,6 +88,7 @@ $wgLinusUseFontAwesome = false;
 $wgLinusShowFooterLinks = false;
 $wgLinusUseFooterIcons = true;
 $wgLinusHideActionsForAnon = true;
+
 $wgLinusEnableNavTag = true;
 $wgLinusEnableButtonsTag = true;
 $wgLinusResponsiveCategories = true;

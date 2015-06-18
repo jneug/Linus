@@ -121,7 +121,8 @@ class LinusCategoryViewer extends CategoryViewer {
 
   function formatList( $articles, $articles_start_char, $cutoff = 6 ) {
     // $list = $this->columnLayout( $articles, $articles_start_char );
-    $list = call_user_func_array(array($this, self::$mCategoryLayout), array($articles, $articles_start_char));
+    // $list = call_user_func_array(array($this, self::$mCategoryLayout), array($articles, $articles_start_char));
+    $list = call_user_func_array(array('LinusCategoryViewer', self::$mCategoryLayout), array($articles, $articles_start_char));
 
     $pageLang = $this->title->getPageLanguage();
     $attribs = array( 'lang' => $pageLang->getCode(), 'dir' => $pageLang->getDir(),
@@ -134,7 +135,7 @@ class LinusCategoryViewer extends CategoryViewer {
   /**
    * Render category items in three grid columns.
    */
-  function gridLayout( $articles, $articles_start_char ) {
+  public static function gridLayout( $articles, $articles_start_char ) {
     $columns = array_combine( $articles, $articles_start_char );
 		# Split into three columns
 		$columns = array_chunk( $columns, ceil( count( $columns ) / 3 ), true /* preserve keys */ );
@@ -188,7 +189,7 @@ class LinusCategoryViewer extends CategoryViewer {
   /**
    * render category items in a .col-md-12 with the columns css property applied
    */
-  function columnLayout( $articles, $articles_start_char ) {
+   public static function columnLayout( $articles, $articles_start_char ) {
     $size = count($articles);
     $half = ceil( $size / 2 );
     $third = ceil( $size / 3 );
@@ -230,7 +231,7 @@ class LinusCategoryViewer extends CategoryViewer {
   /**
    * Render category items in rows after their respective header
    */
-  function rowLayout( $articles, $articles_start_char ) {
+   public static function rowLayout( $articles, $articles_start_char ) {
     $ret = "";
     $prevchar = null;
 
