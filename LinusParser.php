@@ -206,20 +206,22 @@ class LinusParser {
     $text = $line;
     if( strpos($line, '|') !== false ) {
       $parts = explode('|', $line);
-      $href = $parts[0];
-      $text = $parts[1];
+      $href = trim($parts[0]);
+      $text = trim($parts[1]);
 
+      // transform potential href system message
+      $href = LinusParser::_getMessage($href, $href);
 
-      // Deal with some special keywords for dynamic urls (current page, homepage, ...)
+      // Split query string from link target
       $keyword = $href;
       $query = '';
       if( strpos($href, '?') !== false ) {
         $keyword = substr($href, 0, strpos($href, '?'));
         $query = substr($href, strpos($href, '?'));
       }
-      if( in_array($keyword, array('self','mainpage')) ) {
-          // global $wgRequest;
 
+      // Deal with some special keywords for dynamic urls (current page, homepage, ...)
+      if( in_array($keyword, array('self','mainpage')) ) {
         switch( $keyword ) {
           case 'self': global $wgTitle; $href = $wgTitle->getLocalURL(); break;
           case 'mainpage': $href = Title::newMainPage()->getLocalURL(); break;
@@ -238,7 +240,7 @@ class LinusParser {
           $extraAttribs['target'] = $wgExternalLinkTarget;
         }
       } else {
-        $title = Title::newFromText( $href );
+        $title = Title::newFromText($href);
 
         if ( $title ) {
           $title = $title->fixSpecialName();
@@ -249,8 +251,21 @@ class LinusParser {
       }
     }
 
+    // Read system messages
+    if( substr($text,0,1) == ':' ) {
+      $text = substr($text,1);
+      $mwTitle = $text;
+    } else {
+      $mwTitle = LinusParser::_getMessage($text, $text);
+    }
+
+    // If icon empty, look for one in system messages
+    if( empty($icon) ) {
+        $icon = LinusParser::_getMessage('Icon:'.$text, '');
+    }
+
     $item = array(
-      'text'    => $text,
+      'text'    => $mwTitle,
       'href'    => $href,
       'icon'    => $icon
     );
@@ -276,14 +291,9 @@ class LinusParser {
 
   // TODO: Put this into i18n-files?
   static private function _getIconFor( $slug ) {
-    $message = wfMessage('Icon:'.$slug);
-    if( $message->exists() ) {
-      if( $message->isBlank() )
-        return '';
-      elseif ($message->isDisabled())
-        return '-';
-      else
-        return $message->escaped();
+    $message = LinusParser::_getMessage('Icon:'.$slug);
+    if( $message !== false ) {
+      return $message;
     }
 
     global $wgLinusUseFontAwesome;
@@ -373,6 +383,20 @@ class LinusParser {
       }
     }
     return '';
+  }
+
+  static private function _getMessage( $key, $default = false ) {
+    $message = wfMessage($key);
+    if( $message->exists() ) {
+      if( $message->isBlank() )
+        return '';
+      elseif ($message->isDisabled())
+        return '-';
+      else
+        return $message->escaped();
+    } else {
+      return $default;
+    }
   }
 
 }
