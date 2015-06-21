@@ -17,8 +17,14 @@ class LinusTemplate extends BaseTemplate {
 	 * Outputs the entire contents of the page
 	 */
 	public function execute() {
-        global $wgParser;
-        global $wgLinusUseSidebar, $wgLinusTOCInSidebar, $wgLinusHideHeader;
+    global $wgParser, $wgLinusHeadingCount;
+    global $wgLinusUseSidebar, $wgLinusTOCInSidebar, $wgLinusHideHeader;
+
+    // Decide if to show sidebar
+    $showSidebar = $wgLinusUseSidebar;
+    if( $wgLinusTOCInSidebar && $wgLinusHeadingCount >= 3 ) {
+      $showSidebar = true;
+    }
 
 		$this->html( 'headelement' );
     ?>
@@ -28,7 +34,7 @@ class LinusTemplate extends BaseTemplate {
 
 	<main id="wiki-outer-body" class="container">
       <div id="wiki-body" class="row">
-  		<?php if ( $wgLinusUseSidebar || $wgLinusTOCInSidebar ): ?>
+  		<?php if ( $showSidebar ): ?>
         <aside class="col-md-3 hidden-print" id="sidebar">
         <?php $this->renderSidebar() ?>
         </aside>
@@ -170,7 +176,11 @@ class LinusTemplate extends BaseTemplate {
   }
 
   protected function renderSidebar() {
-    global $wgLinusUseSidebar;
+    global $wgLinusUseSidebar, $wgLinusTOCInSidebar;
+
+    if( $wgLinusTOCInSidebar ) {
+      echo '<div id="toc-container"></div>';
+    }
 
     if( $wgLinusUseSidebar ) {
       $sidebar = $this->getSidebar();

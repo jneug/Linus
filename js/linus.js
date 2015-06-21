@@ -25,6 +25,7 @@ $(function() {
 
     // Move toc
     if( $('#sidebar') ) {
+      if( $('#toc-container') ) {
         if ($('#toc')) {
           // read the top padding from the body element (to adjust to fixed navbar)
           // Used in scrollspy and smoothscrolling
@@ -34,8 +35,7 @@ $(function() {
           padTop = Number(padTop);
 
           var $toc = $('#toc')
-            .prependTo($('#sidebar'))
-            .wrap('<div id="toc-spacer"></div>')
+            .prependTo($('#toc-container'))
             .affix({
               offset: {
                 top: 1,
@@ -43,7 +43,7 @@ $(function() {
               }
             });
           $toc.find('ul').addClass('nav nav-pills nav-stacked');
-          $('#toc-spacer').height( $toc.outerHeight() );
+          $('#toc-container').height( $toc.outerHeight() );
           $('body').scrollspy({
             target: '#toc',
             offset: padTop
@@ -64,28 +64,32 @@ $(function() {
                 }
             });
           }
-        } /*else*/
-        // remove sidebar if empty
-        if( $('#sidebar').children().length == 0 ) {
-            $('#sidebar').remove();
-            $('#main-content')
-                .removeClass('col-md-9')
-                .addClass('col-md-12');
+        } else {
+          // Remove #toc-container
+          $('#toc-container').remove();
         }
+      } /*else*/
+      // remove sidebar if empty
+      if( $('#sidebar').children().length == 0 ) {
+          $('#sidebar').remove();
+          $('#main-content')
+              .removeClass('col-md-9')
+              .addClass('col-md-12');
+      }
     }
 
     // Some SMW styling
-    $('.smw-editpage-help')
-        .removeClass('smw-editpage-help')
-        .addClass('well');
-    if( $('.smwfact') ) {
-        $('.smwfact')
-            .removeClass('smwfact')
-            .addClass('smw-factbox');
-        $('.smwfacttable')
-            .removeClass('smwfacttable')
-            .addClass('table table-condensed table-bordered table-striped table-hover');
-    }
+    // $('.smw-editpage-help')
+    //     .removeClass('smw-editpage-help')
+    //     .addClass('well');
+    // if( $('.smwfact') ) {
+    //     $('.smwfact')
+    //         .removeClass('smwfact')
+    //         .addClass('smw-factbox');
+    //     $('.smwfacttable')
+    //         .removeClass('smwfacttable')
+    //         .addClass('table table-condensed table-bordered table-striped table-hover');
+    // }
 
     // Initialize BS components
     // Init tooltips and popovers

@@ -21,8 +21,15 @@ class LinusHooks {
 
         $wgHooks['ParserBeforeTidy'][] = 'LinusHooks::parseMagicWords';
 
+        $wgHooks['DoEditSectionLink'][] = 'LinusHooks::onDoEditSectionLink';
         $wgHooks['EditPageBeforeEditButtons'][] = 'LinusHooks::styleEditButtons';
         $wgHooks['ArticleFromTitle'][] = 'LinusHooks::onArticleFromTitle';
+    }
+
+    // Used to count headings to see if a toc will be generated
+    static function onDoEditSectionLink( $skin, $title, $section, $tooltip, $result, $lang = false ) {
+      global $wgLinusHeadingCount;
+      $wgLinusHeadingCount++;
     }
 
     // static function setupSMWHooks() {
@@ -49,13 +56,20 @@ class LinusHooks {
 	}
 
   static function parseMagicWords( Parser &$parser, &$text ) {
+    global $wgLinusUseSidebar,$wgLinusTOCInSidebar,$wgLinusHideHeader;
+
+    // Save sidebar setting for restoring if NOSIDEBAR and FORCESIDEBAR both were used
+    $sidebar = $wgLinusTOCInSidebar;
+
     if( MagicWord::get( 'LINUS_NOSIDEBAR' )->matchAndRemove( $text ) ) {
-      global $wgLinusUseSidebar,$wgLinusTOCInSidebar;
       $wgLinusUseSidebar = false;
       $wgLinusTOCInSidebar = false;
     }
+    if( MagicWord::get( 'LINUS_FORCESIDEBAR' )->matchAndRemove( $text ) ) {
+      $wgLinusUseSidebar = true;
+      $wgLinusTOCInSidebar = $sidebar;
+    }
     if( MagicWord::get( 'LINUS_NOTITLE' )->matchAndRemove( $text ) ) {
-      global $wgLinusHideHeader;
       $wgLinusHideHeader[] = $parser->getTitle()->getText();
     }
 
