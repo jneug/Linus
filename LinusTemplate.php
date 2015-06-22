@@ -22,7 +22,7 @@ class LinusTemplate extends BaseTemplate {
 
     // Decide if to show sidebar
     $showSidebar = $wgLinusUseSidebar;
-    if( $wgLinusTOCInSidebar && $wgLinusHeadingCount >= 3 ) {
+    if( $wgLinusTOCInSidebar && $wgLinusHeadingCount > 3 ) {
       $showSidebar = true;
     }
 
