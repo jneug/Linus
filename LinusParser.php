@@ -199,7 +199,7 @@ class LinusParser {
     }
 
     // Strip '*'
-    $line = ltrim(ltrim($line, '*'));
+    $line = trim(ltrim($line, '*'));
 
     // Split text from href
     $href = '';
