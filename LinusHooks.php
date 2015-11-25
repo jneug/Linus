@@ -49,33 +49,40 @@ class LinusHooks {
     return true;
   }
 
-	static function styleEditButtons( &$editpage, &$buttons, &$tabindex ) {
+  static function styleEditButtons( &$editpage, &$buttons, &$tabindex ) {
 		$buttons['save'] = substr($buttons['save'],0,-1).' class="btn btn-success">';
 		$buttons['preview'] = substr($buttons['preview'],0,-1).' class="btn btn-primary">';
 		$buttons['diff'] = substr($buttons['diff'],0,-1).' class="btn btn-primary">';
 	}
 
-  static function parseMagicWords( Parser &$parser, &$text ) {
-    global $wgLinusUseSidebar,$wgLinusTOCInSidebar,$wgLinusHideHeader;
+    static function parseMagicWords( Parser &$parser, &$text ) {
+        global $wgLinusUseSidebar,$wgLinusTOCInSidebar,$wgLinusHideHeader;
 
-    // Save sidebar setting for restoring if NOSIDEBAR and FORCESIDEBAR both were used
-    $sidebar = $wgLinusTOCInSidebar;
+        // Save sidebar setting for restoring if NOSIDEBAR and FORCESIDEBAR both were used
+        $sidebar = $wgLinusTOCInSidebar;
 
-    if( MagicWord::get( 'LINUS_NOSIDEBAR' )->matchAndRemove( $text ) ) {
-      $wgLinusUseSidebar = false;
-      $wgLinusTOCInSidebar = false;
-    }
-    if( MagicWord::get( 'LINUS_FORCESIDEBAR' )->matchAndRemove( $text ) ) {
-      $wgLinusUseSidebar = true;
-      $wgLinusTOCInSidebar = $sidebar;
-    }
-    if( MagicWord::get( 'LINUS_NOTITLE' )->matchAndRemove( $text ) ) {
-      $wgLinusHideHeader[] = $parser->getTitle()->getText();
-    }
+        try {
+            if( MagicWord::get( 'LINUS_NOSIDEBAR' )->matchAndRemove( $text ) ) {
+              $wgLinusUseSidebar = false;
+              $wgLinusTOCInSidebar = false;
+            }
+            if( MagicWord::get( 'LINUS_FORCESIDEBAR' )->matchAndRemove( $text ) ) {
+              $wgLinusUseSidebar = true;
+              $wgLinusTOCInSidebar = $sidebar;
+            }
+            if( MagicWord::get( 'LINUS_NOTITLE' )->matchAndRemove( $text ) ) {
+              $wgLinusHideHeader[] = $parser->getTitle()->getText();
+            }
 
-    $parser->disableCache();
+            // TODO: Is this necessary? Seems overkill to disable Cache every time.
+            $parser->disableCache();
 
-		return true;
+            return true;
+        } catch( MWException $ex ) {
+            // Magic word definitions not loaded from LinusMagic.php
+            // Probably due to loading from mw-config ?
+            return false;
+        }
 	}
 
 	static function NavSetup( Parser $parser ) {
