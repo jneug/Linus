@@ -13,10 +13,10 @@ if ( ! defined( 'MEDIAWIKI' ) ) {
 
 class LinusTemplate extends BaseTemplate {
 
-	/**
-	 * Outputs the entire contents of the page
-	 */
-	public function execute() {
+    /**
+     * Outputs the entire contents of the page
+     */
+    public function execute() {
     global $wgParser, $wgLinusHeadingCount;
     global $wgLinusUseSidebar, $wgLinusTOCInSidebar, $wgLinusHideHeader;
 
@@ -26,67 +26,73 @@ class LinusTemplate extends BaseTemplate {
       $showSidebar = true;
     }
 
-		$this->html( 'headelement' );
+        $this->html( 'headelement' );
     ?>
     <!-- link to content for accessibility -->
     <a href="#wiki-body" class="sr-only">Skip to main content</a>
     <?php $this->renderNavbar(); ?>
 
-	<main id="wiki-outer-body" class="container">
+    <main id="wiki-outer-body" class="container">
       <div id="wiki-body" class="row">
-  		<?php if ( $showSidebar ): ?>
+          <?php if ( $showSidebar ): ?>
         <aside class="col-md-3 hidden-print" id="sidebar">
         <?php $this->renderSidebar() ?>
         </aside>
-		<section class="col-md-9 wiki-body-section" id="main-content">
+        <section class="col-md-9 wiki-body-section" id="main-content">
         <?php else: ?>
         <section class="col-md-12 wiki-body-section" id="main-content">
-  		<?php endif; ?>
+          <?php endif; ?>
 
-  			<?php if( $this->data['sitenotice'] ): ?>
-          <!-- siteNotice -->
-  				<div id="siteNotice" class="alert alert-warning"><?php $this->html('sitenotice') ?></div>
-          <!-- /siteNotice -->
-			<?php endif; ?>
-			<?php if ( $this->data['undelete'] ): ?>
-  				<!-- undelete -->
-  				<div id="contentSub2"><?php $this->html( 'undelete' ) ?></div>
-  				<!-- /undelete -->
-			<?php endif; ?>
-			<?php if($this->data['newtalk'] ): ?>
-  				<!-- newtalk -->
-  				<div class="usermessage"><?php $this->html( 'newtalk' )  ?></div>
-  				<!-- /newtalk -->
-			<?php endif; ?>
+              <?php if( $this->data['sitenotice'] ): ?>
+                <!-- siteNotice -->
+                  <div id="siteNotice" class="alert alert-warning"><?php $this->html('sitenotice') ?></div>
+                <!-- /siteNotice -->
+            <?php endif; ?>
+            <?php if ( $this->data['undelete'] ): ?>
+                <!-- undelete -->
+                <div id="contentSub2"><?php $this->html( 'undelete' ) ?></div>
+                <!-- /undelete -->
+            <?php endif; ?>
+            <?php if($this->data['newtalk'] ): ?>
+                <!-- newtalk -->
+                <div class="usermessage"><?php $this->html( 'newtalk' )  ?></div>
+                <!-- /newtalk -->
+            <?php endif; ?>
 
             <?php if ( !empty( $this->data['title'] ) && !in_array($this->data['title'],$wgLinusHideHeader) ): ?>
-  				<div class="pagetitle page-header">
-  					<h1><?php $this->html( 'title' ) ?></h1>
+                  <div class="pagetitle page-header">
+                    <?php if( $this->getIndicators() ): ?>
+                    <div id="page-indicators" class="pull-right">
+                        <?php echo $this->getIndicators(); ?>
+                    </div>
+                    <?php endif; ?>
+
+                    <h1><?php $this->html( 'title' ) ?></h1>
 
                     <?php if( $this->data['subtitle'] ): ?>
                     <div class="pagesubtitle text-muted"><?php $this->html('subtitle') ?></div>
                     <?php endif; ?>
-  				</div>
+                  </div>
             <?php endif; ?>
 
-			<article class="body">
-  				<?php $this->renderBody() ?>
+            <article class="body">
+                  <?php $this->renderBody() ?>
             </article>
 
-  				<?php if ( $this->data['catlinks'] ): ?>
+                  <?php if ( $this->data['catlinks'] ): ?>
                 <!-- catlinks -->
-  				<?php $this->html( 'catlinks' ); ?>
+                  <?php $this->html( 'catlinks' ); ?>
                   <!-- /catlinks -->
-  				<?php endif; ?>
-  				<?php if ( $this->data['dataAfterContent'] ): ?>
-  				<!-- dataAfterContent -->
+                  <?php endif; ?>
+                  <?php if ( $this->data['dataAfterContent'] ): ?>
+                  <!-- dataAfterContent -->
                   <div class="data-after-content"><?php $this->html( 'dataAfterContent' ); ?></div>
-  				<!-- /dataAfterContent -->
-  				<?php endif; ?>
+                  <!-- /dataAfterContent -->
+                  <?php endif; ?>
 
         </section> <!-- /.wiki-body-section -->
       </div> <!-- /.row -->
-		</main>
+        </main>
 
   <?php
     $this->renderFooter();
@@ -94,7 +100,7 @@ class LinusTemplate extends BaseTemplate {
   ?>
 </body>
 </html><?php
-	} // execute()
+    } // execute()
 
 
 
