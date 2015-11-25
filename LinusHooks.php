@@ -21,15 +21,28 @@ class LinusHooks {
 
         $wgHooks['ParserBeforeTidy'][] = 'LinusHooks::parseMagicWords';
 
-        $wgHooks['DoEditSectionLink'][] = 'LinusHooks::onDoEditSectionLink';
+        // TODO Fails in some cases, where headings without edit section links are generated (eg. category result format for SMW)
+        $GLOBALS['wgLinusHeadingCount'] = 0;
+        $wgHooks['OutputPageParserOutput'][] = 'LinusHooks::countSections';
         $wgHooks['EditPageBeforeEditButtons'][] = 'LinusHooks::styleEditButtons';
         $wgHooks['ArticleFromTitle'][] = 'LinusHooks::onArticleFromTitle';
     }
 
     // Used to count headings to see if a toc will be generated
-    static function onDoEditSectionLink( $skin, $title, $section, $tooltip, $result, $lang = false ) {
+    // static function countSections() {
+    // static function countSections($parser, $section, &$sectionContent, $showEditLinks) {
+    static function countSections(OutputPage &$out, ParserOutput $parseroutput) {
       global $wgLinusHeadingCount;
-      $wgLinusHeadingCount++;
+
+      // if( $section != 0 )
+      //   $wgLinusHeadingCount++;
+
+      $toc = $parseroutput->getTOCHTML();
+      if( !empty($toc) ) {
+        $wgLinusHeadingCount = 5;
+      }
+
+      return true;
     }
 
     // static function setupSMWHooks() {
