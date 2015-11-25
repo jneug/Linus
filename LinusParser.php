@@ -48,7 +48,7 @@ class LinusParser {
                       . ' <span class="caret"></span>'
                       . '</button>';
         $output .= '<ul class="dropdown-menu" role="menu">';
-        $output .= LinusParser::nav($navItem['items'], $level+1);
+        $output .= LinusParser::nav($navItem['items'], false, $level+1);
         $output .= '</ul>';
         $output .= '</div>';
       } else {
@@ -68,7 +68,7 @@ class LinusParser {
     return $output;
   }
 
-  static public function nav( $nav, $level = 0 ) {
+  static public function nav( $nav, $isNavbar = false, $level = 0 ) {
     $output = '';
     foreach ( $nav as $navSlug => $navItem ) {
       if ( array_key_exists('items', $navItem) ) {
@@ -79,14 +79,14 @@ class LinusParser {
                       . ' <span class="caret"></span>'
                       .'</a>';
         $output .= '<ul class="dropdown-menu">';
-        $output .= LinusParser::nav($navItem['items'], $level+1);
+        $output .= LinusParser::nav($navItem['items'], $isNavbar, $level+1);
         $output .= '</ul>';
         $output .= '</li>';
       } else {
         if( isset($navItem['divider']) && $navItem['divider'] ) {
           $output .= '<li class="divider"></li>';
         } else if( empty($navItem['href']) ) {
-          $output .= '<li class="'.($level==0?'navbar-text':'dropdown-header').'">'.LinusParser::getIcon($navItem['icon']).$navItem['text'].'</li>';
+          $output .= '<li class="'.($level==0?($isNavbar?'navbar-text':'nav-text'):'dropdown-header').'">'.LinusParser::getIcon($navItem['icon']).$navItem['text'].'</li>';
         } else {
 	      	$attributes = array('href="'.$navItem['href'].'"');
             if( isset($navItem['id']) )
@@ -245,6 +245,10 @@ class LinusParser {
         if ( $title ) {
           $title = $title->fixSpecialName();
           $href = $title->getLinkURL();
+
+          // Pipe trick
+          if( empty($text) )
+            $text = $title->getText();
         } else {
           $href = '';
         }
