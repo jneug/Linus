@@ -48,7 +48,6 @@ function setupSMWextensions() {
 }
 
 // Setup resource modules
-// TODO: Use .less files here?
 $wgResourceModules['skins.linus.styles'] = array(
 	'styles' => array(
 	    'css/bootstrap.min.css'    => array( 'media' => 'all' ),
@@ -98,6 +97,7 @@ $wgLinusResponsiveCategories = true;
 
 $wgLinusTitlebarPage = 'MediaWiki:Linus/Titlebar';
 $wgLinusFooterPage = 'MediaWiki:Linus/Footer';
+$wgLinusSidebarPage = 'MediaWiki:Linus/Sidebar';
 $wgLinusCopyrightPage = 'MediaWiki:Linus/Copyright';
 
 $wgLinusHideHeader = array('Mainpage','Hauptseite');

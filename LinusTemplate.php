@@ -38,7 +38,7 @@ class LinusTemplate extends BaseTemplate {
         <aside class="col-md-3 hidden-print" id="sidebar">
         <?php $this->renderSidebar() ?>
         </aside>
-		    <section class="col-md-9 wiki-body-section" id="main-content">
+		<section class="col-md-9 wiki-body-section" id="main-content">
         <?php else: ?>
         <section class="col-md-12 wiki-body-section" id="main-content">
   		<?php endif; ?>
@@ -47,31 +47,31 @@ class LinusTemplate extends BaseTemplate {
           <!-- siteNotice -->
   				<div id="siteNotice" class="alert alert-warning"><?php $this->html('sitenotice') ?></div>
           <!-- /siteNotice -->
-  				<?php endif; ?>
-  				<?php if ( $this->data['undelete'] ): ?>
+			<?php endif; ?>
+			<?php if ( $this->data['undelete'] ): ?>
   				<!-- undelete -->
   				<div id="contentSub2"><?php $this->html( 'undelete' ) ?></div>
   				<!-- /undelete -->
-  				<?php endif; ?>
-  				<?php if($this->data['newtalk'] ): ?>
+			<?php endif; ?>
+			<?php if($this->data['newtalk'] ): ?>
   				<!-- newtalk -->
   				<div class="usermessage"><?php $this->html( 'newtalk' )  ?></div>
   				<!-- /newtalk -->
-  				<?php endif; ?>
+			<?php endif; ?>
 
-          <?php if ( !empty( $this->data['title'] ) && !in_array($this->data['title'],$wgLinusHideHeader) ): ?>
+            <?php if ( !empty( $this->data['title'] ) && !in_array($this->data['title'],$wgLinusHideHeader) ): ?>
   				<div class="pagetitle page-header">
   					<h1><?php $this->html( 'title' ) ?></h1>
 
-            <?php if( $this->data['subtitle'] ): ?>
-            <div class="pagesubtitle text-muted"><?php $this->html('subtitle') ?></div>
-            <?php endif; ?>
+                    <?php if( $this->data['subtitle'] ): ?>
+                    <div class="pagesubtitle text-muted"><?php $this->html('subtitle') ?></div>
+                    <?php endif; ?>
   				</div>
-          <?php endif; ?>
+            <?php endif; ?>
 
-  				<article class="body">
+			<article class="body">
   				<?php $this->renderBody() ?>
-          </article>
+            </article>
 
   				<?php if ( $this->data['catlinks'] ): ?>
                 <!-- catlinks -->
@@ -129,7 +129,7 @@ class LinusTemplate extends BaseTemplate {
             <div class="collapse navbar-collapse" id="linus-navbar-collapse">
                 <?php if( LinusParser::pageExists($wgLinusTitlebarPage) ): ?>
                 <ul class="nav navbar-nav">
-                  <?php echo LinusParser::nav( LinusParser::getNavigationFromPage($wgLinusTitlebarPage) ) ?>
+                  <?php echo LinusParser::nav( LinusParser::getNavigationFromPage($wgLinusTitlebarPage), true ) ?>
                 </ul>
                 <?php endif; ?>
 
@@ -176,25 +176,33 @@ class LinusTemplate extends BaseTemplate {
   }
 
   protected function renderSidebar() {
-    global $wgLinusUseSidebar, $wgLinusTOCInSidebar;
+    global $wgLinusUseSidebar, $wgLinusTOCInSidebar, $wgLinusSidebarPage;
 
     if( $wgLinusTOCInSidebar ) {
-      echo '<div id="toc-container"></div>';
+      echo '<div id="toc-container"></div>'."\n";
     }
 
     if( $wgLinusUseSidebar ) {
-      $sidebar = $this->getSidebar();
-        foreach( $sidebar as $boxName => $box) {
-          echo '<div class="hidden-sm hidden-xs"id="'.Sanitizer::escapeId($box['id']).'">'."\n";
-          echo '<h2>'.htmlspecialchars($box['header']).'</h2>'."\n";
-          echo '<ul class="nav nav-pills nav-stacked">';
-          // echo '<li class="disabled"><a href="#">'.$content['header'].'</a></li>';
-          // echo '<li class="navbar-text"><a href="#">'.$content['header'].'</a></li>';
-          echo LinusParser::nav(LinusParser::getNavigationFromData($boxName,'',$box['content']));
-          echo '</ul>'."\n";
-          echo '</div>'."\n";
-        }
+      if( LinusParser::pageExists($wgLinusSidebarPage) ) {
+        echo '<div class="hidden-sm hidden-xs"id="linus-sidebar-box">'."\n";
+        echo '<ul class="nav nav-pills nav-stacked">';
+        echo LinusParser::nav( LinusParser::getNavigationFromPage($wgLinusSidebarPage) );
+        echo '</ul>'."\n";
+        echo '</div>'."\n";
       }
+
+      $sidebar = $this->getSidebar();
+      foreach( $sidebar as $boxName => $box) {
+        echo '<div class="hidden-sm hidden-xs"id="'.Sanitizer::escapeId($box['id']).'">'."\n";
+        echo '<h2>'.htmlspecialchars($box['header']).'</h2>'."\n";
+        echo '<ul class="nav nav-pills nav-stacked">';
+        // echo '<li class="disabled"><a href="#">'.$content['header'].'</a></li>';
+        // echo '<li class="navbar-text"><a href="#">'.$content['header'].'</a></li>';
+        echo LinusParser::nav(LinusParser::getNavigationFromData($boxName,'',$box['content']));
+        echo '</ul>'."\n";
+        echo '</div>'."\n";
+      }
+    }
   }
 
   protected function renderBody() {
@@ -225,11 +233,11 @@ class LinusTemplate extends BaseTemplate {
         <?php echo LinusParser::getPageContent( $wgLinusFooterPage ); ?>
     </div>
     <div class="row">
-        <div class="col-md-8">
+      <div class="col-md-8">
         <?php if( LinusParser::pageExists( $wgLinusCopyrightPage ) ): ?>
         <p class="copyright"><?php echo LinusParser::getPageContent( $wgLinusCopyrightPage ) ?></p>
         <?php endif; ?>
-    </div>
+      </div>
       <div class="col-md-4" id="footer-links">
           <?php if( $wgLinusShowFooterLinks ): ?>
           <ul>
