@@ -1,0 +1,112 @@
+{
+	"name": "Linus",
+	"author": [
+		"Jonas Neugebauer"
+	],
+	"url": "https://github.com/jneug/Linus",
+	"descriptionmsg": "linus-desc",
+	"namemsg": "skinname-linus",
+	"license-name": "GPL-2.0+",
+    "version": "0.3.1",
+	"type": "skin",
+	"ConfigRegistry": {
+		"vector": "GlobalVarConfig::newInstance"
+	},
+	"ValidSkinNames": {
+		"linus": "Linus"
+	},
+	"MessagesDirs": {
+		"Linus": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+        "SkinLinus": "SkinLinus.php",
+        "LinusParser": "LinusParser.php",
+        "LinusTemplate": "LinusTemplate.php",
+        "LinusHooks": "LinusHooks.php",
+        "ResponsiveCategory": "LinusSMW.php"
+	},
+    "ExtensionMessagesFiles": {
+		"LinusMagic": "LinusMagic.php"
+	},
+    "ExtensionFunctions": ["LinusHooks::setupSMWExtensions"],
+    "callback": "LinusHooks::onExtensionLoad",
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"LinusHooks::NavSetup",
+            "LinusHooks::ButtonsSetup"
+		],
+        "ParserBeforeTidy": [
+            "LinusHooks::parseMagicWords"
+        ],
+        "OutputPageParserOutput": [
+            "LinusHooks::countSections"
+        ],
+        "EditPageBeforeEditButtons": [
+            "LinusHooks::styleEditButtons"
+        ],
+        "ArticleFromTitle": [
+            "LinusHooks::onArticleFromTitle"
+        ]
+	},
+	"ResourceModules": {
+		"skins.linus.styles": {
+			"styles": {
+				"css/bootstrap.min.css": {
+					"media": "all"
+				},
+				"less/linus.less": {
+					"media": "all"
+				},
+				"less/custom.less": {
+					"media": "all"
+				}
+			}
+		},
+		"skins.linus.scripts": {
+			"scripts": [
+				"js/bootstrap.min.js",
+				"js/linus.js",
+                "js/custom.js"
+			],
+			"position": "top"
+		},
+		"skins.linus.fontawesome": {
+			"styles": {
+				"css/font-awesome.min.css": {
+					"media": "all"
+				}
+			}
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "Linus"
+	},
+	"ResourceModuleSkinStyles": {
+		"Linus": {
+		}
+	},
+	"config": {
+        "LinusUseSidebar": false,
+        "LinusTOCInSidebar": false,
+        "LinusEnableSmoothScroll": true,
+        "LinusNavbarInverted": false,
+        "LinusNavbarFixed": true,
+        "Sitenameshort": null,
+        "LinusUseFontAwesome": false,
+        "LinusShowFooterLinks": false,
+        "LinusUseFooterIcons": true,
+        "LinusHideActionsForAnon": true,
+        "LinusEnableNavTag": true,
+        "LinusEnableButtonsTag": true,
+        "LinusResponsiveCategories": true,
+        "LinusTitlebarPage": "MediaWiki:Linus/Titlebar",
+        "LinusFooterPage": "MediaWiki:Linus/Footer",
+        "LinusSidebarPage": "MediaWiki:Linus/Sidebar",
+        "LinusCopyrightPage": "MediaWiki:Linus/Copyright",
+        "LinusHideHeader": ["Mainpage","Hauptseite"]
+	},
+	"manifest_version": 1
+}

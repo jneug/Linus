@@ -28,6 +28,10 @@ class LinusHooks {
         $wgHooks['ArticleFromTitle'][] = 'LinusHooks::onArticleFromTitle';
     }
 
+    static function onExtensionLoad() {
+        
+    }
+
     // Used to count headings to see if a toc will be generated
     // static function countSections() {
     // static function countSections($parser, $section, &$sectionContent, $showEditLinks) {

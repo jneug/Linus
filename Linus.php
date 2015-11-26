@@ -15,11 +15,11 @@ $wgExtensionCredits['skin'][] = array(
 	'path'        => __FILE__,
 	'name'        => 'Linus',
   	'namemsg'     => 'skinname-linus',
-  	'version'     => '0.0.1-alpha',
+  	'version'     => '0.3.1',
   	'descriptionmsg' => 'linus-desc',
   	'url' 			  => 'http://www.github.com/jneug/Linus',
 	'author'      => '[http://jonas-neugebauer.de Jonas Neugebauer]',
-	'license'     => 'GPL-2.0',
+	'license'     => 'GPL-2.0+',
 );
 
 $wgValidSkinNames['linus'] = 'Linus';
