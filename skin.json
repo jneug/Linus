@@ -7,7 +7,7 @@
 	"descriptionmsg": "linus-desc",
 	"namemsg": "skinname-linus",
 	"license-name": "GPL-2.0+",
-    "version": "0.3.1",
+    "version": "2.0.0",
 	"type": "skin",
 	"ConfigRegistry": {
 		"vector": "GlobalVarConfig::newInstance"
@@ -30,8 +30,10 @@
     "ExtensionMessagesFiles": {
 		"LinusMagic": "LinusMagic.php"
 	},
-    "ExtensionFunctions": ["LinusHooks::setupSMWExtensions"],
     "callback": "LinusHooks::onExtensionLoad",
+    "ExtensionFunctions": [
+        "LinusHooks::setupSMWExtensions"
+    ],
 	"Hooks": {
 		"ParserFirstCallInit": [
 			"LinusHooks::NavSetup",
@@ -52,6 +54,7 @@
 	},
 	"ResourceModules": {
 		"skins.linus.styles": {
+			"position": "top",
 			"styles": {
 				"css/bootstrap.min.css": {
 					"media": "all"
@@ -65,14 +68,15 @@
 			}
 		},
 		"skins.linus.scripts": {
-			"scripts": [
+            "position": "top",
+            "scripts": [
 				"js/bootstrap.min.js",
 				"js/linus.js",
                 "js/custom.js"
-			],
-			"position": "top"
+			]
 		},
 		"skins.linus.fontawesome": {
+			"position": "top",
 			"styles": {
 				"css/font-awesome.min.css": {
 					"media": "all"
@@ -106,7 +110,10 @@
         "LinusFooterPage": "MediaWiki:Linus/Footer",
         "LinusSidebarPage": "MediaWiki:Linus/Sidebar",
         "LinusCopyrightPage": "MediaWiki:Linus/Copyright",
-        "LinusHideHeader": ["Mainpage","Hauptseite"]
+        "LinusHideHeader": [
+            "Mainpage",
+            "Hauptseite"
+        ]
 	},
 	"manifest_version": 1
 }
