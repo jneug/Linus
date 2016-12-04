@@ -26,10 +26,10 @@ class LinusParser {
     } else {
       $article = new Article($pageTitle);
       if( $raw ) {
-        return $article->getRawText();
+        return $article->getContent(); //$article->getRawText();
       } else {
         $wgParserOptions = new ParserOptions($wgUser);
-        $parserOutput = $wgParser->parse($article->getRawText(), $pageTitle, $wgParserOptions);
+        $parserOutput = $wgParser->parse($article->getContent(), $pageTitle, $wgParserOptions);
         return $parserOutput->getText();
       }
     }
